@@ -220,15 +220,42 @@ ${theme.textShadow ? `
   const objPosY = avatar.objectPositionY !== undefined ? avatar.objectPositionY : 50;
 
   // FIX: .pp-uc-avatar IS the image tag, not a wrapper around it
+  // Phase 4: Handle both Clip-Path (Polygon) and Mask-Image (SVG)
+  const shape = avatar.clipPath || 'none';
+  const isMask = shape.startsWith('url('); // If it's a URL, it's a Data URI mask we set
+
+  const avatarRules = [
+    `border-color: ${accentColor} !important;`,
+    `border-radius: ${avatar.borderRadius !== undefined ? avatar.borderRadius : 50}% !important;`,
+    `object-fit: cover !important;`,
+    `object-position: ${objPosX}% ${objPosY}% !important;`,
+    `width: ${avatar.width !== undefined ? avatar.width : 100}px !important;`,
+    `height: ${avatar.height !== undefined ? avatar.height : 100}px !important;`
+  ];
+
+  if (isMask) {
+    // Use Mask Image for complex shapes
+    avatarRules.push(`mask-image: ${shape} !important;`);
+    avatarRules.push(`webkit-mask-image: ${shape} !important;`); // Safari/Chrome support
+    avatarRules.push(`mask-size: contain !important;`);
+    avatarRules.push(`webkit-mask-size: contain !important;`);
+    avatarRules.push(`mask-position: center !important;`);
+    avatarRules.push(`webkit-mask-position: center !important;`);
+    avatarRules.push(`mask-repeat: no-repeat !important;`);
+    avatarRules.push(`webkit-mask-repeat: no-repeat !important;`);
+    // Reset clip-path if switching from polygon
+    avatarRules.push(`clip-path: none !important;`);
+  } else {
+    // Use Clip Path for polygons
+    avatarRules.push(`clip-path: ${shape} !important;`);
+    // Reset mask if switching from mask
+    avatarRules.push(`mask-image: none !important;`);
+    avatarRules.push(`webkit-mask-image: none !important;`);
+  }
+
   cssParts.push(`
 img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
-  border-color: ${accentColor} !important;
-  border-radius: ${avatar.borderRadius !== undefined ? avatar.borderRadius : 50}% !important;
-  object-fit: cover !important;
-  object-position: ${objPosX}% ${objPosY}% !important;
-  width: ${avatar.width !== undefined ? avatar.width : 100}px !important; 
-  height: ${avatar.height !== undefined ? avatar.height : 100}px !important;
-  clip-path: ${avatar.clipPath || 'none'} !important;
+  ${avatarRules.join('\n  ')}
 }
 /* Ensure the container matches the image size so it reserves space in the flex row */
 .pp-uc-avatar-container, .profile-avatar-container {
