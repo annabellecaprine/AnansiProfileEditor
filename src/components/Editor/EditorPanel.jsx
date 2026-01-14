@@ -250,6 +250,20 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                             onChange={(e) => updateLayout(selectedElement, 'borderRadius', parseInt(e.target.value))}
                                         />
                                     </div>
+                                    <div className="input-group">
+                                        <label className="sub-label">Shape Mask</label>
+                                        <select
+                                            className="text-input"
+                                            value={getLayout(selectedElement).clipPath || ''}
+                                            onChange={(e) => updateLayout(selectedElement, 'clipPath', e.target.value)}
+                                        >
+                                            <option value="">None (Default)</option>
+                                            <option value="polygon(50% 0%, 0% 100%, 100% 100%)">Triangle</option>
+                                            <option value="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)">Diamond</option>
+                                            <option value="polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)">Hexagon</option>
+                                            <option value="polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%)">Cross</option>
+                                        </select>
+                                    </div>
                                     <div className="control-row">
                                         <span>Pos X (%)</span>
                                         <input
@@ -339,6 +353,22 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                 color={theme.accentColor}
                                 onChange={(c) => updateTheme('accentColor', c)}
                             />
+
+                            <label className="sub-label">Font Family</label>
+                            <select
+                                className="text-input"
+                                style={{ width: '100%', marginBottom: 16 }}
+                                value={theme.fontFamily || 'Inter'}
+                                onChange={(e) => updateTheme('fontFamily', e.target.value)}
+                            >
+                                <option value="'Inter', sans-serif">Inter (Default)</option>
+                                <option value="Arial, sans-serif">Arial / Sans Serif</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman / Serif</option>
+                                <option value="'Courier New', Courier, monospace">Courier New / Monospace</option>
+                                <option value="'Comic Sans MS', 'Chalkboard SE', sans-serif">Comic Sans (Fun)</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                            </select>
 
                             <ColorControl
                                 label="Text Color"

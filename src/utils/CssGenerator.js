@@ -37,7 +37,7 @@ export function generateCssFromTheme(theme) {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'Inter', sans-serif;
+    font-family: ${theme.fontFamily || "'Inter', sans-serif"};
     color: ${theme.textColor || '#FFFFFF'} !important;
 }
 
@@ -46,6 +46,7 @@ export function generateCssFromTheme(theme) {
 .pp-page-background h4, .pp-page-background h5, .pp-page-background h6,
 .pp-page-background p, .pp-page-background span, .pp-page-background div {
     color: ${theme.textColor || '#FFFFFF'};
+    font-family: ${theme.fontFamily || "'Inter', sans-serif"};
 }
 
 /* Container Layout */
@@ -173,6 +174,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
   object-position: ${objPosX}% ${objPosY}% !important;
   width: ${avatar.width !== undefined ? avatar.width : 100}px !important; 
   height: ${avatar.height !== undefined ? avatar.height : 100}px !important;
+  clip-path: ${avatar.clipPath || 'none'} !important;
 }
 /* Ensure the container matches the image size so it reserves space in the flex row */
 .pp-uc-avatar-container, .profile-avatar-container {
