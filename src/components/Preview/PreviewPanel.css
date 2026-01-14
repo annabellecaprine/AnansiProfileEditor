@@ -72,55 +72,11 @@
 
 .character-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* Columns handled by dynamic CSS */
     gap: 16px;
 }
 
-.mock-card {
-    background: #1A202C;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: default;
-    transition: transform 0.2s;
-    border: 1px solid #2d3748;
-}
 
-.mock-card:hover {
-    transform: translateY(-2px);
-}
-
-.char-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.char-info {
-    padding: 12px;
-}
-
-.char-info h4 {
-    color: #fff;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.char-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.char-tag {
-    font-size: 0.7rem;
-    background: #2D3748;
-    color: #A0AEC0;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
 
 /* PROFILE CARD STYLES (Existing + Tweaks) */
 .pp-uc-background {
@@ -145,4 +101,79 @@
         width: 100%;
         position: static;
     }
+}
+
+/* PREMIUM MOCK CARD STYLES */
+.mock-card {
+    background: #1A202C;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #2d3748;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.mock-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.char-img {
+    width: 100%;
+    /* Enforce 1:1 Aspect Ratio properly */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    height: auto;
+}
+
+.char-info {
+    padding: 16px;
+    /* Gradient background for premium look */
+    background: linear-gradient(to top, #1A202C 80%, rgba(26, 32, 44, 0.6));
+    z-index: 2;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Pull up effect */
+    margin-top: -40px;
+    position: relative;
+    pointer-events: none;
+}
+
+.char-info>* {
+    pointer-events: auto;
+}
+
+.char-info h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.char-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+}
+
+.char-tag {
+    font-size: 0.7rem;
+    background: #2D3748;
+    color: #A0AEC0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }

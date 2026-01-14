@@ -13,7 +13,7 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                 <span>Card Roundness (px)</span>
                 <input
                     type="range" min="0" max="20"
-                    value={theme.entities?.borderRadius || 8}
+                    value={theme.entities?.borderRadius ?? 8}
                     onChange={(e) => updateEntities('borderRadius', parseInt(e.target.value))}
                 />
             </div>
@@ -91,7 +91,19 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                     </>
                 ) : (
                     <div className="control-row">
-                        <span style={{ color: '#888', fontStyle: 'italic', fontSize: '0.9rem' }}>Grid mode uses automatic sizing based on container width.</span>
+                        <span>Columns</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <input
+                                type="range" min="1" max="6" step="1"
+                                style={{ flex: 1 }}
+                                value={theme.entities?.gridColumns || 3}
+                                onChange={(e) => updateEntities('gridColumns', parseInt(e.target.value))}
+                            />
+                            <span style={{ minWidth: 30, textAlign: 'right' }}>{theme.entities?.gridColumns || 3}</span>
+                        </div>
+                        <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#888' }}>
+                            Controls how many cards appear per row.
+                        </div>
                     </div>
                 )}
             </div>

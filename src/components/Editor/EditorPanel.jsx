@@ -109,7 +109,20 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <h2>About Anansi Profile Editor</h2>
                         <p>A specialized tool for creating beautiful, customized styling for JanitorAI profiles.</p>
-                        <p>Created by <b>Annabelle Caprine</b>.</p>
+                        <hr style={{ borderColor: '#4A5568', margin: '16px 0' }} />
+                        <p><strong>Created by:</strong> <span style={{ color: '#F687B3' }}>Annabelle Caprine</span></p>
+                        <p><strong>Version:</strong> 1.0.1</p>
+
+                        <div style={{ marginTop: 16 }}>
+                            <p style={{ fontWeight: 'bold', marginBottom: 4 }}>Special Thanks:</p>
+                            <p style={{ fontSize: '0.9em', color: '#A0AEC0', lineHeight: '1.4' }}>
+                                <strong style={{ color: theme.accentColor }}>RaeRae</strong>, <strong style={{ color: theme.accentColor }}>Puppy</strong>, <strong style={{ color: theme.accentColor }}>Lav</strong>, <strong style={{ color: theme.accentColor }}>Tiggerdropped</strong>, and the entire JAI CSS Community.
+                            </p>
+                        </div>
+
+                        <p style={{ marginTop: 12, fontSize: '0.8em', color: '#718096', fontStyle: 'italic' }}>
+                            Built with React & Lucide.
+                        </p>
                         <button className="close-btn" onClick={() => setShowAbout(false)}>Close</button>
                     </div>
                 </div>
