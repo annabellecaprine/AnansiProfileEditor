@@ -268,8 +268,6 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                             <optgroup label="Curved (SVG Mask)">
                                                 <option value="url('data:image/svg+xml;utf8,<svg viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z%22/></svg>')">Heart</option>
                                                 <option value="url('data:image/svg+xml;utf8,<svg viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z%22/></svg>')">Cloud</option>
-                                                <option value="url('data:image/svg+xml;utf8,<svg viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M8.82 17.05C8.82 17.05 11.97 12 11.97 12s3.15 5.05 3.15 5.05S16.96 19 15.22 19H8.78c-1.74 0-3.15-1.95 0.04-1.95z M12 2C9 7 4 9 4 14c0 2.21 1.79 4 4 4 1.58 0 2.97-.9 3.69-2.23.16-.3.62-.27.7.07C12.72 17.5 13.53 19 12 22h-1c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1 0-1.88 1.13-2.67 2.39-3.76.72-.63 1.61-1.4 1.61-2.24 0-2.21-1.79-4-4-4-2.21 0-7-2-7-5z%22/></svg>')">Spade (Complex)</option>
-                                                <option value="url('data:image/svg+xml;utf8,<svg viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22><circle cx=%2212%22 cy=%228%22 r=%224%22/><circle cx=%225.5%22 cy=%2214%22 r=%223.5%22/><circle cx=%2218.5%22 cy=%2214%22 r=%223.5%22/><path d=%22M12 15l-1 5h2l-1-5z%22/></svg>')">Club (Simple)</option>
                                                 <option value="circle(50% at 50% 50%)">Circle (Default)</option>
                                             </optgroup>
                                         </select>
@@ -355,7 +353,6 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
 
                         {/* COLOR & GLOW */}
                         <div className="control-section">
-                            <label><Sparkles size={14} /> Accent & Text</label>
                             <label><Sparkles size={14} /> Accent & Text</label>
 
                             <ColorControl
