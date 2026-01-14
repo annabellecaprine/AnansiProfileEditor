@@ -575,18 +575,19 @@ ${selector} .pp-cc-avatar,
   justify-content: flex-end !important;
   align-items: center !important;
   padding-bottom: 20px;
-  transform: rotateY(180deg) translateZ(1px); /* Ensure it's 'above' the backface */
-  backface-visibility: visible; /* To be seen when flipped */
+  transform: rotateY(180deg) translateZ(1px); /* Start facing away */
+  backface-visibility: visible;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.5s ease; /* Animate transform too */
   pointer-events: none;
 }
-/* Ensure tags are visible on hover and not obscured */
+/* Ensure tags flip to face user (360deg) on hover */
 .pp-cc-list-container > *:hover .pp-cc-tags,
 .mock-card:hover .char-tags {
   opacity: 1;
   pointer-events: auto;
   z-index: 20;
+  transform: rotateY(360deg) translateZ(1px);
 }
 
 /* Tag Items */
@@ -597,8 +598,17 @@ ${selector} .pp-cc-avatar,
     padding: 2px 8px !important;
     margin: 2px !important;
     font-size: 0.75rem !important;
-    /* Ensure tag text is not mirrored if parent logic fails */
-    transform: rotateY(0deg); 
+    transform: none; /* Reset inner transform */
+}
+
+/* Button Hover Rotation */
+.pp-cc-list-container > *:hover > a::after,
+.pp-cc-list-container > *:hover::after,
+.mock-card:hover::after {
+  opacity: 1;
+  background: #111;
+  color: #f9f9f9;
+  transform: rotateY(360deg); /* Flip to face user */
 }
 
 /* Force Flex Column Reverse on Mock Card Main content to match snippet flow */
