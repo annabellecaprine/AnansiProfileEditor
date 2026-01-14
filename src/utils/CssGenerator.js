@@ -168,6 +168,20 @@ ${theme.textShadow ? `
     }
   }
 
+  // Bell Shake Animation
+  if (theme.bellShake) {
+    cssParts.push(`
+@keyframes ppShakeBell {
+    0%, 50%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(25deg); }
+    20%, 40% { transform: rotate(-25deg); }
+}
+[aria-label="Notifications"] svg:has(+ div) {
+    animation: ppShakeBell 1.5s infinite !important;
+}
+`);
+  }
+
   // ==========================================
   // 3. LAYOUT ENGINE (Existing)
   // ==========================================
@@ -266,6 +280,22 @@ img.pp-uc-avatar {
   cssParts.push(genLayoutBlock('.pp-uc-about-me', layout.bio));
   cssParts.push(genLayoutBlock('.stats-row', layout.stats));
 
+  // Center Profile Info (Snippet)
+  if (theme.centerInfo) {
+    cssParts.push(`
+/* Center Profile Info Snippet */
+.css-1uodvt1, .profile-info-hstack {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+.pp-uc-avatar-container {
+    margin: 0 auto !important;
+}
+`);
+  }
+
 
   // ==========================================
   // 4. ENTITIES (CHARACTER CARDS)
@@ -341,6 +371,27 @@ img.pp-uc-avatar {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
+}
+`);
+  }
+
+  // Hide Event Icons
+  if (entities.hideEvents) {
+    cssParts.push(`
+/* Hide Event Icons (Valentine, Christmas, etc) */
+.css-5v5qgx, .css-1wqmh16, .css-nip9dx, .css-xrg4vd, .css-1awld45, .css-1cui3us, .css-8828od, .css-1henxb, .css-effh3d {
+    display: none !important;
+}
+`);
+  }
+
+  // Card Fade Effect
+  if (entities.cardFade) {
+    cssParts.push(`
+/* Card Fade Effect */
+.pp-cc-avatar {
+    mask-image: linear-gradient(to bottom, #000000, #000000 80%, #00000000 98%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000000, #000000 80%, #00000000 98%) !important;
 }
 `);
   }

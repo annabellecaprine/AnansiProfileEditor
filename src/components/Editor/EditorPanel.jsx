@@ -194,6 +194,15 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                     <ArrowDownUp size={14} /> Col
                                 </button>
                             </div>
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-centerInfo"
+                                    checked={theme.centerInfo || false}
+                                    onChange={(e) => updateTheme('centerInfo', e.target.checked)}
+                                />
+                                <label htmlFor="chk-centerInfo" style={{ margin: 0, fontWeight: 400, fontSize: '0.85rem' }}>Center Profile Info</label>
+                            </div>
                         </div>
 
                         <hr className="divider" />
@@ -577,6 +586,16 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                     <option value="shake">Shake (Subtle)</option>
                                 </select>
                             </div>
+
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-bellShake"
+                                    checked={theme.bellShake || false}
+                                    onChange={(e) => updateTheme('bellShake', e.target.checked)}
+                                />
+                                <label htmlFor="chk-bellShake" style={{ margin: 0, fontWeight: 400, fontSize: '0.85rem' }}>Shake Notification Bell</label>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -706,6 +725,26 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                     onChange={(e) => updateEntities('hideCreator', e.target.checked)}
                                 />
                                 <label htmlFor="chk-hideCreator" style={{ margin: 0, fontWeight: 400 }}>Hide Creator Name</label>
+                            </div>
+
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-hideEvents"
+                                    checked={theme.entities?.hideEvents || false}
+                                    onChange={(e) => updateEntities('hideEvents', e.target.checked)}
+                                />
+                                <label htmlFor="chk-hideEvents" style={{ margin: 0, fontWeight: 400 }}>Hide Event Icons</label>
+                            </div>
+
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-cardFade"
+                                    checked={theme.entities?.cardFade || false}
+                                    onChange={(e) => updateEntities('cardFade', e.target.checked)}
+                                />
+                                <label htmlFor="chk-cardFade" style={{ margin: 0, fontWeight: 400 }}>Fade Image Bottom</label>
                             </div>
 
                             <hr className="divider" />
