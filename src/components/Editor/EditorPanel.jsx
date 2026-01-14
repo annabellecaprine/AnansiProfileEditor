@@ -7,6 +7,68 @@ import './EditorPanel.css'
 
 import { RotateCcw } from 'lucide-react'
 
+// --- Helpers ---
+const hexToRgb = (hex) => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '';
+}
+
+const rgbToHex = (r, g, b) => {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+}
+
+// Reusable Color Component to handle bidirectional Hex/RGB sync
+const ColorControl = ({ label, color, onChange }) => {
+    const rgbString = hexToRgb(color || '#000000');
+
+    const handleRgbChange = (e) => {
+        const val = e.target.value; // Expecting "R, G, B" or "R G B"
+        const parts = val.split(/[ ,]+/).map(p => parseInt(p)).filter(n => !isNaN(n));
+        if (parts.length === 3) {
+            const [r, g, b] = parts;
+            if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+                onChange(rgbToHex(r, g, b));
+            }
+        }
+    }
+
+    return (
+        <div style={{ marginBottom: 16 }}>
+            {label && <label className="sub-label">{label}</label>}
+            <div className="picker-wrapper">
+                <HexColorPicker color={color || '#000000'} onChange={onChange} />
+                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+                    <div style={{ flex: 1 }}>
+                        <span style={{ fontSize: 10, color: '#888', display: 'block', marginBottom: 2 }}>HEX</span>
+                        <input
+                            type="text"
+                            className="text-input"
+                            style={{ width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
+                            value={color}
+                            onChange={(e) => onChange(e.target.value)}
+                        />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <span style={{ fontSize: 10, color: '#888', display: 'block', marginBottom: 2 }}>RGB</span>
+                        <input
+                            type="text"
+                            className="text-input"
+                            style={{ width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
+                            placeholder="R, G, B"
+                            defaultValue={rgbString}
+                            key={color} // Force re-render on color change to update defaultValue safely
+                            onBlur={handleRgbChange} // Update only on blur to allow typing
+                            onKeyDown={(e) => e.key === 'Enter' && handleRgbChange(e)}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default function EditorPanel({ theme, setTheme, content, setContent, manualCSS, setManualCSS, onReset }) {
     const [activeTab, setActiveTab] = useState('visual')
     const [selectedElement, setSelectedElement] = useState('header') // For Layout Tab
@@ -270,29 +332,19 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                         {/* COLOR & GLOW */}
                         <div className="control-section">
                             <label><Sparkles size={14} /> Accent & Text</label>
-                            <label className="sub-label">Accent Color</label>
-                            <div className="picker-wrapper">
-                                <HexColorPicker color={theme.accentColor} onChange={(c) => updateTheme('accentColor', c)} />
-                                <input
-                                    type="text"
-                                    className="text-input"
-                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
-                                    value={theme.accentColor}
-                                    onChange={(e) => updateTheme('accentColor', e.target.value)}
-                                />
-                            </div>
+                            <label><Sparkles size={14} /> Accent & Text</label>
 
-                            <label className="sub-label" style={{ marginTop: 16 }}>Text Color</label>
-                            <div className="picker-wrapper">
-                                <HexColorPicker color={theme.textColor || '#FFFFFF'} onChange={(c) => updateTheme('textColor', c)} />
-                                <input
-                                    type="text"
-                                    className="text-input"
-                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
-                                    value={theme.textColor || '#FFFFFF'}
-                                    onChange={(e) => updateTheme('textColor', e.target.value)}
-                                />
-                            </div>
+                            <ColorControl
+                                label="Accent Color"
+                                color={theme.accentColor}
+                                onChange={(c) => updateTheme('accentColor', c)}
+                            />
+
+                            <ColorControl
+                                label="Text Color"
+                                color={theme.textColor || '#FFFFFF'}
+                                onChange={(c) => updateTheme('textColor', c)}
+                            />
 
                             <hr className="divider" />
 
@@ -334,17 +386,11 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                         {/* CARD BACKGROUND */}
                         <div className="control-section">
                             <label><Palette size={14} /> Card Background</label>
-                            <label className="sub-label">Color</label>
-                            <div className="picker-wrapper">
-                                <HexColorPicker color={theme.cardBgColor || '#1A202C'} onChange={(c) => updateTheme('cardBgColor', c)} />
-                                <input
-                                    type="text"
-                                    className="text-input"
-                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
-                                    value={theme.cardBgColor || '#1A202C'}
-                                    onChange={(e) => updateTheme('cardBgColor', e.target.value)}
-                                />
-                            </div>
+                            <ColorControl
+                                label="Color"
+                                color={theme.cardBgColor || '#1A202C'}
+                                onChange={(c) => updateTheme('cardBgColor', c)}
+                            />
                             <div className="control-row">
                                 <span>Opacity</span>
                                 <input
