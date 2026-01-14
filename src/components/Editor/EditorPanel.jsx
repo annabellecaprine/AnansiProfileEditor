@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
-import { Palette, Code, Layers, Type, Image as ImageIcon, Eye, Sparkles, FileText, User, Layout, Move, Maximize, Download } from 'lucide-react'
+import { Palette, Code, Layers, Type, Image as ImageIcon, Eye, Sparkles, FileText, User, Layout, Move, Maximize, Download, Info, X } from 'lucide-react'
 import RichTextToolbar from './RichTextToolbar'
 import { generateCssFromTheme } from '../../utils/CssGenerator'
 import './EditorPanel.css'
@@ -73,6 +73,7 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
     const [activeTab, setActiveTab] = useState('visual')
     const [selectedElement, setSelectedElement] = useState('header') // For Layout Tab
     const [copyFeedback, setCopyFeedback] = useState(false)
+    const [showAbout, setShowAbout] = useState(false)
 
     const handleExport = () => {
         const generated = generateCssFromTheme(theme)
@@ -142,6 +143,13 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                     </button>
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
+                    <button
+                        onClick={() => setShowAbout(true)}
+                        title="About & Credits"
+                        style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: '#4A5568', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}
+                    >
+                        <Info size={16} />
+                    </button>
                     <button
                         onClick={onReset}
                         title="Reset to Default"
@@ -695,6 +703,55 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                     </div>
                 )}
             </div>
+
+            {/* === ABOUT MODAL === */}
+            {showAbout && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 9999,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                }}>
+                    <div style={{
+                        backgroundColor: '#1A202C', width: 400, padding: 24, borderRadius: 12,
+                        border: '1px solid #4A5568', boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+                        position: 'relative', textAlign: 'left'
+                    }}>
+                        <button
+                            onClick={() => setShowAbout(false)}
+                            style={{
+                                position: 'absolute', top: 12, right: 12, background: 'none',
+                                border: 'none', color: '#A0AEC0', cursor: 'pointer'
+                            }}
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <h2 style={{ marginTop: 0, marginBottom: 8, color: theme.accentColor }}>Anansi Editor</h2>
+                        <p style={{ color: '#A0AEC0', fontSize: '0.9rem', marginBottom: 20 }}>
+                            A powerful visual editor for styling Anansi profiles.
+                        </p>
+
+                        <h3 style={{ fontSize: '1rem', color: '#E2E8F0', marginBottom: 8 }}>Special Thanks</h3>
+                        <p style={{ color: '#CBD5E0', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                            This product would not be possible if not for these awesome folks:<br />
+                            <strong style={{ color: theme.accentColor }}>RaeRae</strong>, <strong style={{ color: theme.accentColor }}>Puppy</strong>, <strong style={{ color: theme.accentColor }}>Lav</strong>,<br />
+                            and the entire <strong>JAI CSS Community</strong>.
+                        </p>
+
+                        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid #2D3748', textAlign: 'center' }}>
+                            <button
+                                onClick={() => setShowAbout(false)}
+                                style={{
+                                    background: theme.accentColor, color: '#000', border: 'none',
+                                    padding: '8px 24px', borderRadius: 6, fontWeight: 'bold', cursor: 'pointer'
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
