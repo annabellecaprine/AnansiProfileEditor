@@ -128,6 +128,50 @@ ${theme.textShadow ? `
 `);
 
 
+  // Animations
+  if (theme.animation) {
+    // Float Animation
+    if (theme.animation === 'float') {
+      cssParts.push(`
+@keyframes ppFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+    animation: ppFloat 6s ease-in-out infinite !important;
+}
+`);
+    }
+    // Pulse Animation
+    if (theme.animation === 'pulse') {
+      cssParts.push(`
+@keyframes ppPulse {
+    0% { box-shadow: 0 0 ${theme.glowIntensity}px ${accentColor}40; }
+    50% { box-shadow: 0 0 ${parseInt(theme.glowIntensity) + 15}px ${accentColor}80; }
+    100% { box-shadow: 0 0 ${theme.glowIntensity}px ${accentColor}40; }
+}
+.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+    animation: ppPulse 3s infinite !important;
+}
+`);
+    }
+    // Shake Animation (Fun extra)
+    if (theme.animation === 'shake') {
+      cssParts.push(`
+@keyframes ppShake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
+}
+.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+    animation: ppShake 0.5s linear infinite !important;
+}
+`);
+    }
+  }
+
   // ==========================================
   // 3. LAYOUT ENGINE (Existing)
   // ==========================================
@@ -384,6 +428,7 @@ export const defaultTheme = {
   cardGradient: '',
   boxShadow: '',
   textShadow: '',
+  animation: '', // New: 'float', 'pulse', 'shake'
   fontFamily: 'Inter',
   hideStats: false,
   hideBadges: false,

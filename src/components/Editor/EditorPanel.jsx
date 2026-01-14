@@ -505,6 +505,20 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                     <option value="none">Flat (No Shadow)</option>
                                 </select>
                             </div>
+
+                            <div className="input-group">
+                                <label className="sub-label">Card Animation</label>
+                                <select
+                                    className="text-input"
+                                    value={theme.animation || ''}
+                                    onChange={(e) => updateTheme('animation', e.target.value)}
+                                >
+                                    <option value="">None</option>
+                                    <option value="float">Float (Hovering)</option>
+                                    <option value="pulse">Pulse (Glow)</option>
+                                    <option value="shake">Shake (Subtle)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 )}
