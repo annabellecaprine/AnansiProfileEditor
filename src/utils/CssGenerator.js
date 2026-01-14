@@ -314,14 +314,17 @@ img.pp-uc-avatar {
 
   // Grayscale Effect
   if (entities.grayscale) {
+    const selector = entities.flipCard ? '.pp-cc-list-container > *:hover' : '.pp-cc-list-container > *:hover';
+
     cssParts.push(`
-/* Grayscale Effect */
+/* Grayscale Avatar (Color on Hover) */
 .pp-cc-avatar {
-    filter: grayscale(1);
+    filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
-.pp-cc-avatar-container:hover .pp-cc-avatar {
-    filter: grayscale(0);
+${selector} .pp-cc-avatar,
+.mock-card:hover .pp-cc-avatar {
+    filter: grayscale(0%);
 }
 `);
   }
@@ -415,14 +418,17 @@ img.pp-uc-avatar {
   gap: 0;
 }
 
-/* 3D Perspective Setup */
-.pp-cc-list-container > * {
+/* 3D Perspective & Preservation */
+.pp-cc-list-container > *,
+.mock-card {
   position: relative;
   perspective: 1000px;
+  transform-style: preserve-3d !important;
 }
 
-/* Smooth Animation for all children */
-.pp-cc-list-container > * * {
+/* Smooth Animation */
+.pp-cc-list-container > * *,
+.mock-card * {
   transition: all 500ms;
 }
 
@@ -473,7 +479,7 @@ img.pp-uc-avatar {
   transition: all 500ms;
 }
 
-/* Flip Effect on Hover (Front Side Hidden) */
+/* Flip Effect on Hover */
 .pp-cc-list-container > *:hover .pp-cc-avatar-container,
 .pp-cc-list-container > *:hover .pp-cc-name,
 .pp-cc-list-container > *:hover .pp-cc-description,
@@ -491,14 +497,8 @@ img.pp-uc-avatar {
 }
 
 /* Card Background Gradient Strip (Top) */
-.pp-cc-list-container > *::after,
-.mock-card::after {
-  /* Note: reusing ::after for gradient might conflict with Go Button on mock-card if not careful.
-     The snippet uses a::after for button and card::after for gradient.
-     Mock card is the container AND the link equivalent.
-     We might need to skip the gradient on preview or hook it to a child.
-     Let's skip generic ::after gradient on mock-card to avoid conflict with button.
-  */
+/* MOVED: Combined with ::before for mock-card to avoid conflict with ::after button */
+.pp-cc-list-container > *::after {
   position: absolute;
   content: "";
   top: 0; left: 0;
@@ -509,13 +509,33 @@ img.pp-uc-avatar {
   background-image: linear-gradient(-20deg, ${theme.accentColor}40 0%, ${theme.accentColor} 100%);
   transition: all 500ms;
 }
-.pp-cc-list-container > * > a::after {
-    /* Restore Go Button styles explicitly for real structure */
-    background: none;
-    height: auto;
-    width: auto;
-    z-index: 10;
-    transform: rotateY(180deg);
+.pp-cc-list-container > *:hover::after {
+  height: 100%;
+  border-radius: 10px;
+  transform: rotateY(180deg);
+}
+
+/* MOCK CARD SPECIFIC: Combine Background + Gradient on ::before to free ::after for button */
+.mock-card::before {
+    /* Gradient overlaid on background color */
+    background: 
+        linear-gradient(-20deg, ${theme.accentColor}40 0%, ${theme.accentColor} 100%) top left / 100% 110px no-repeat,
+        ${cardBgColor} !important;
+    transition: all 500ms;
+}
+.mock-card:hover::before {
+    /* Expand gradient on hover */
+    background: 
+        linear-gradient(-20deg, ${theme.accentColor}40 0%, ${theme.accentColor} 100%) top left / 100% 100% no-repeat,
+        ${cardBgColor} !important;
+}
+/* Disable default ::after gradient for mock-card */
+.mock-card::after {
+    background-image: none !important;
+    height: auto !important;
+    width: auto !important;
+    border-radius: 0 !important;
+    position: absolute !important; /* Ensure it stays absolute for button positioning */
 }
 
 /* Avatar Styling */
@@ -555,16 +575,18 @@ img.pp-uc-avatar {
   justify-content: flex-end !important;
   align-items: center !important;
   padding-bottom: 20px;
-  transform: rotateY(180deg); /* Hidden by default */
+  transform: rotateY(180deg) translateZ(1px); /* Ensure it's 'above' the backface */
   backface-visibility: visible; /* To be seen when flipped */
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
+/* Ensure tags are visible on hover and not obscured */
 .pp-cc-list-container > *:hover .pp-cc-tags,
 .mock-card:hover .char-tags {
   opacity: 1;
   pointer-events: auto;
+  z-index: 20;
 }
 
 /* Tag Items */
@@ -575,6 +597,8 @@ img.pp-uc-avatar {
     padding: 2px 8px !important;
     margin: 2px !important;
     font-size: 0.75rem !important;
+    /* Ensure tag text is not mirrored if parent logic fails */
+    transform: rotateY(0deg); 
 }
 
 /* Force Flex Column Reverse on Mock Card Main content to match snippet flow */
