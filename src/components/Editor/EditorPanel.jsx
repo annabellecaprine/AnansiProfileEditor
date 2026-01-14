@@ -747,6 +747,18 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                 <label htmlFor="chk-cardFade" style={{ margin: 0, fontWeight: 400 }}>Fade Image Bottom</label>
                             </div>
 
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-flipCard"
+                                    checked={theme.entities?.flipCard || false}
+                                    onChange={(e) => updateEntities('flipCard', e.target.checked)}
+                                />
+                                <label htmlFor="chk-flipCard" style={{ margin: 0, fontWeight: 400 }}>
+                                    Flip Card Effect <span style={{ fontSize: '0.7em', color: '#e53e3e' }}>(BETA)</span>
+                                </label>
+                            </div>
+
                             <hr className="divider" />
 
                             <hr className="divider" />

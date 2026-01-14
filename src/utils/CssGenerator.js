@@ -396,6 +396,196 @@ img.pp-uc-avatar {
 `);
   }
 
+  // Tigerdropped's Flip Card Design
+  if (entities.flipCard) {
+    const cardBgColor = theme.cardBgColor || '#1A202C'; // Fallback to current card color
+    const tagColor = theme.accentColor || '#111';
+
+    cssParts.push(`
+/* === TIGERDROPPED FLIP CARD EFFECT (ADAPTED) === */
+
+/* Removing all bot card backgrounds */
+.pp-cc-list-container > * {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Spacing between items */
+.pp-cc-list-container {
+  gap: 0;
+}
+
+/* 3D Perspective Setup */
+.pp-cc-list-container > * {
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Smooth Animation for all children */
+.pp-cc-list-container > * * {
+  transition: all 500ms;
+}
+
+/* Select the anchor tag wrapper (or mock card for preview) */
+.pp-cc-list-container > * > a,
+.mock-card {
+  display: flex !important;
+  flex-flow: column-reverse nowrap !important;
+}
+
+/* Go Button (Pseudo-element on the link/card) */
+.pp-cc-list-container > * > a::after,
+.mock-card::after {
+  position: absolute;
+  top: 15px;
+  right: 13px;
+  padding: 4px 8px;
+  font-family: ${theme.fontFamily || 'Inter, sans-serif'};
+  font-size: 0.8rem;
+  border-radius: 32px;
+  border: 2px solid #111;
+  content: "Go to bot →";
+  color: #111;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transition: all 500ms;
+  opacity: 0; /* Default hidden */
+  z-index: 10;
+}
+
+/* Hover state for Go Button */
+.pp-cc-list-container > *:hover > a::after,
+.pp-cc-list-container > *:hover::after {
+  opacity: 1;
+  background: #111;
+  color: #f9f9f9;
+}
+
+/* Card Background (Back & Front) */
+.pp-cc-list-container > *::before,
+.mock-card::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -2;
+  background: ${cardBgColor} !important;
+  border-radius: 10px;
+  transition: all 500ms;
+}
+
+/* Flip Effect on Hover (Front Side Hidden) */
+.pp-cc-list-container > *:hover .pp-cc-avatar-container,
+.pp-cc-list-container > *:hover .pp-cc-name,
+.pp-cc-list-container > *:hover .pp-cc-description,
+.pp-cc-list-container > *:hover .pp-cc-ribbon-wrap,
+.mock-card:hover .pp-cc-avatar,
+.mock-card:hover .pp-cc-name-box,
+.mock-card:hover .char-name {
+  transform: rotateY(180deg);
+}
+
+/* Rotate the "Back" elements to be visible */
+.pp-cc-list-container > *:hover::before,
+.mock-card:hover::before {
+   transform: rotateY(180deg);
+}
+
+/* Card Background Gradient Strip (Top) */
+.pp-cc-list-container > *::after,
+.mock-card::after {
+  /* Note: reusing ::after for gradient might conflict with Go Button on mock-card if not careful.
+     The snippet uses a::after for button and card::after for gradient.
+     Mock card is the container AND the link equivalent.
+     We might need to skip the gradient on preview or hook it to a child.
+     Let's skip generic ::after gradient on mock-card to avoid conflict with button.
+  */
+  position: absolute;
+  content: "";
+  top: 0; left: 0;
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: 110px;
+  z-index: -1;
+  background-image: linear-gradient(-20deg, ${theme.accentColor}40 0%, ${theme.accentColor} 100%);
+  transition: all 500ms;
+}
+.pp-cc-list-container > * > a::after {
+    /* Restore Go Button styles explicitly for real structure */
+    background: none;
+    height: auto;
+    width: auto;
+    z-index: 10;
+    transform: rotateY(180deg);
+}
+
+/* Avatar Styling */
+.pp-cc-avatar, .char-img {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    object-position: top !important;
+    margin-bottom: 20px !important;
+}
+
+/* Hide Specific Elements */
+.pp-cc-tokens-count, 
+.pp-cc-star-line, 
+.pp-cc-star {
+  display: none !important;
+}
+
+/* Name Styling */
+.pp-cc-name, .char-name {
+    color: ${theme.textColor || '#fff'} !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    backface-visibility: hidden;
+    padding: 10px;
+}
+
+/* Tags Container (Only visible on back/flip) */
+.pp-cc-tags, .char-tags {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  padding-bottom: 20px;
+  transform: rotateY(180deg); /* Hidden by default */
+  backface-visibility: visible; /* To be seen when flipped */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.pp-cc-list-container > *:hover .pp-cc-tags,
+.mock-card:hover .char-tags {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Tag Items */
+.pp-cc-tag, .char-tag {
+    background: ${theme.accentColor} !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 2px 8px !important;
+    margin: 2px !important;
+    font-size: 0.75rem !important;
+}
+
+/* Force Flex Column Reverse on Mock Card Main content to match snippet flow */
+.mock-card {
+    display: flex !important;
+    flex-direction: column-reverse !important; 
+    justify-content: flex-end;
+}
+`);
+  }
+
   // Card Layout Engine: Grid vs Flex
   if (entities.layoutMode === 'flex') {
     const cardWidth = entities.cardWidth || 300;
