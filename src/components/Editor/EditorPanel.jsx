@@ -273,11 +273,25 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                             <label className="sub-label">Accent Color</label>
                             <div className="picker-wrapper">
                                 <HexColorPicker color={theme.accentColor} onChange={(c) => updateTheme('accentColor', c)} />
+                                <input
+                                    type="text"
+                                    className="text-input"
+                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
+                                    value={theme.accentColor}
+                                    onChange={(e) => updateTheme('accentColor', e.target.value)}
+                                />
                             </div>
 
                             <label className="sub-label" style={{ marginTop: 16 }}>Text Color</label>
                             <div className="picker-wrapper">
                                 <HexColorPicker color={theme.textColor || '#FFFFFF'} onChange={(c) => updateTheme('textColor', c)} />
+                                <input
+                                    type="text"
+                                    className="text-input"
+                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
+                                    value={theme.textColor || '#FFFFFF'}
+                                    onChange={(e) => updateTheme('textColor', e.target.value)}
+                                />
                             </div>
 
                             <hr className="divider" />
@@ -323,6 +337,13 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                             <label className="sub-label">Color</label>
                             <div className="picker-wrapper">
                                 <HexColorPicker color={theme.cardBgColor || '#1A202C'} onChange={(c) => updateTheme('cardBgColor', c)} />
+                                <input
+                                    type="text"
+                                    className="text-input"
+                                    style={{ marginTop: 8, width: '100%', fontFamily: 'monospace', textAlign: 'center' }}
+                                    value={theme.cardBgColor || '#1A202C'}
+                                    onChange={(e) => updateTheme('cardBgColor', e.target.value)}
+                                />
                             </div>
                             <div className="control-row">
                                 <span>Opacity</span>
