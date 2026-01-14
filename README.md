@@ -1,16 +1,45 @@
-# React + Vite
+# Anansi Profile Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A powerful, visual editor for creating advanced CSS themes for JanitorAI profiles.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- **Visual Editing**: Real-time preview of your profile.
+- **One-Click Export**: Generates copy-paste ready CSS.
+- **Character Grids**: Force 1-6 columns for your characters.
+- **Advanced Styling**: Glassmorphism, animations, and extensive flexbox controls.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🏗 Architecture (v1.1)
 
-## React Compiler
+The project follows a component-based architecture with a modular CSS backend.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Core Structure
+- **`src/components/Editor/tabs/`**: specialized editors for each domain.
+  - **`VisualEditor`**: Splits into `ThemeSettings` (Global) and `CardAppearance` (Local).
+  - **`LayoutEditor`**: Uses `ElementStyler` for reusable flex/spacing controls.
+  - **`EntitiesEditor`**: Manages character grid visuals and effects.
+- **`src/components/Editor/ui/`**: Atomic components (`Slider`, `Select`, `Button`) for consistent UI.
 
-## Expanding the ESLint configuration
+### CSS Generation (`src/utils/css/`)
+CSS generation is split into four backend modules:
+1.  **`visual.js`**: Theme colors, fonts, backgrounds, animations.
+2.  **`layout.js`**: Page structure, responsiveness, and flex positioning.
+3.  **`entities.js`**: Character card gradients, effects, and grid layout.
+4.  **`core.js`**: Shared helpers and layout block generators.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Development
+
+### Setup
+```bash
+npm install
+npm run dev
+```
+
+### Build
+```bash
+npm run build
+```
+
+### Tech Stack
+- React
+- Vite
+- Tauri (Windows App)
