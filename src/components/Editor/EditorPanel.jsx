@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
-import { Palette, Code, Layers, Type, Image as ImageIcon, Eye, Sparkles, FileText, User, Layout, Move, Maximize, Download, Info, X } from 'lucide-react'
+import { Palette, Code, Layers, Type, Image as ImageIcon, Eye, Sparkles, FileText, User, Layout, Move, Maximize, Download, Info, X, ArrowRightLeft, ArrowDownUp, Columns, WrapText } from 'lucide-react'
 import RichTextToolbar from './RichTextToolbar'
 import { generateCssFromTheme } from '../../utils/CssGenerator'
 import './EditorPanel.css'
@@ -168,6 +168,36 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                 {/* === LAYOUT EDITOR === */}
                 {activeTab === 'layout' && (
                     <div className="visual-editor">
+                        {/* PAGE STRUCTURE */}
+                        <div className="control-section">
+                            <label><Layout size={14} /> Page Structure</label>
+                            <div className="button-group">
+                                <button
+                                    className={(!theme.pageLayout || theme.pageLayout === 'row') ? 'active' : ''}
+                                    onClick={() => updateTheme('pageLayout', 'row')}
+                                    title="Standard (Bio Left, Cards Right)"
+                                >
+                                    <ArrowRightLeft size={14} /> Row
+                                </button>
+                                <button
+                                    className={theme.pageLayout === 'row-reverse' ? 'active' : ''}
+                                    onClick={() => updateTheme('pageLayout', 'row-reverse')}
+                                    title="Reverse (Cards Left, Bio Right)"
+                                >
+                                    <ArrowRightLeft size={14} style={{ transform: 'scaleX(-1)' }} /> Rev
+                                </button>
+                                <button
+                                    className={theme.pageLayout === 'column' ? 'active' : ''}
+                                    onClick={() => updateTheme('pageLayout', 'column')}
+                                    title="Column (Bio Top, Cards Bottom)"
+                                >
+                                    <ArrowDownUp size={14} /> Col
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr className="divider" />
+
                         <div className="control-section">
                             <label><Move size={14} /> Select Element to Edit</label>
                             <select
@@ -669,20 +699,66 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
 
                             <hr className="divider" />
 
-                            <div className="control-row">
-                                <span>Grid Columns (Force Layout)</span>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <input
-                                        type="range" min="1" max="6" step="1"
-                                        style={{ flex: 1 }}
-                                        value={theme.entities?.gridColumns || 3}
-                                        onChange={(e) => updateEntities('gridColumns', parseInt(e.target.value))}
-                                    />
-                                    <span style={{ minWidth: 20 }}>{theme.entities?.gridColumns || 3}</span>
+                            <hr className="divider" />
+
+                            <div className="control-section">
+                                <label style={{ marginBottom: 8 }}>
+                                    {theme.entities?.layoutMode === 'flex' ? <WrapText size={14} /> : <Columns size={14} />}
+                                    Layout Mode
+                                </label>
+                                <div className="button-group" style={{ marginBottom: 16 }}>
+                                    <button
+                                        className={theme.entities?.layoutMode !== 'flex' ? 'active' : ''}
+                                        onClick={() => updateEntities('layoutMode', 'grid')}
+                                    >Grid (Strict)</button>
+                                    <button
+                                        className={theme.entities?.layoutMode === 'flex' ? 'active' : ''}
+                                        onClick={() => updateEntities('layoutMode', 'flex')}
+                                    >Flex (Responsive)</button>
                                 </div>
-                                <p style={{ fontSize: '0.75rem', color: '#666', marginTop: 4 }}>
-                                    Forces the character grid to use this many columns on desktop, overriding J.AI defaults.
-                                </p>
+
+                                {theme.entities?.layoutMode === 'flex' ? (
+                                    <>
+                                        <div className="control-row">
+                                            <span>Card Width (px)</span>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                                <input
+                                                    type="range" min="100" max="500" step="10"
+                                                    style={{ flex: 1 }}
+                                                    value={theme.entities?.cardWidth || 300}
+                                                    onChange={(e) => updateEntities('cardWidth', parseInt(e.target.value))}
+                                                />
+                                                <span style={{ minWidth: 30, textAlign: 'right' }}>{theme.entities?.cardWidth || 300}</span>
+                                            </div>
+                                        </div>
+                                        <div className="control-row">
+                                            <span>Gap (px)</span>
+                                            <input
+                                                type="number" className="mini-input" style={{ width: 60 }}
+                                                value={theme.entities?.gap !== undefined ? theme.entities.gap : 16}
+                                                onChange={(e) => updateEntities('gap', parseInt(e.target.value))}
+                                            />
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="control-row">
+                                        <span>Grid Columns (Force Layout)</span>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                            <input
+                                                type="range" min="1" max="6" step="1"
+                                                style={{ flex: 1 }}
+                                                value={theme.entities?.gridColumns || 3}
+                                                onChange={(e) => updateEntities('gridColumns', parseInt(e.target.value))}
+                                            />
+                                            <span style={{ minWidth: 20 }}>{theme.entities?.gridColumns || 3}</span>
+                                        </div>
+                                    </div>
+                                )}
+                                {theme.entities?.layoutMode !== 'flex' && (
+                                    <p style={{ fontSize: '0.75rem', color: '#666', marginTop: 4 }}>
+                                        Forces the character grid to use this many columns on desktop, overriding J.AI defaults.
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -728,7 +804,7 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
 
                         <h2 style={{ marginTop: 0, marginBottom: 8, color: theme.accentColor }}>Anansi Editor</h2>
                         <p style={{ color: '#A0AEC0', fontSize: '0.9rem', marginBottom: 20 }}>
-                            A powerful visual editor for styling Anansi profiles.
+                            A powerful visual editor for styling JanitorAI Style profiles.
                         </p>
 
                         <h3 style={{ fontSize: '1rem', color: '#E2E8F0', marginBottom: 8 }}>Special Thanks</h3>

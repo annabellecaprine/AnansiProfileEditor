@@ -39,6 +39,7 @@ export function generateCssFromTheme(theme) {
     background-attachment: fixed;
     font-family: ${theme.fontFamily || "'Inter', sans-serif"};
     color: ${theme.textColor || '#FFFFFF'} !important;
+    color-scheme: dark !important; /* Forces browser form elements to dark mode */
 }
 
 /* Text Overrides */
@@ -52,7 +53,8 @@ export function generateCssFromTheme(theme) {
 /* Container Layout */
 .profile-page-container-flex-box {
     display: flex;
-    flex-direction: row;
+    display: flex;
+    flex-direction: ${theme.pageLayout || 'row'};
     max-width: 1400px;
     margin: 0 auto;
     padding: 30px 20px;
@@ -351,10 +353,30 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
 `);
   }
 
-  // Grid Columns Override
-  const gridCols = entities.gridColumns || 3;
-  if (gridCols) {
+  // Card Layout Engine: Grid vs Flex
+  if (entities.layoutMode === 'flex') {
+    const cardWidth = entities.cardWidth || 300;
+    const gap = entities.gap !== undefined ? entities.gap : 16;
     cssParts.push(`
+/* Flex Layout for Cards */
+.pp-cc-list-container, .css-16g5xvc {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: ${gap}px !important;
+    width: 100% !important;
+}
+/* Target direct children (cards) */
+.pp-cc-list-container > *, .css-16g5xvc > * {
+    width: ${cardWidth}px !important;
+    flex: 1 1 ${cardWidth}px !important;
+    max-width: 100% !important;
+}
+`);
+  } else {
+    // Default Grid Mode
+    const gridCols = entities.gridColumns || 3;
+    if (gridCols) {
+      cssParts.push(`
 /* Force Grid Columns */
 .pp-cc-list-container, .css-16g5xvc {
     display: grid !important;
@@ -363,6 +385,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
     gap: 16px !important;
 }
 `);
+    }
   }
 
   // Start with default theme for other parts
