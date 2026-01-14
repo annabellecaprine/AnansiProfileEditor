@@ -2,6 +2,7 @@ import React from 'react'
 import { FileText, Type } from 'lucide-react'
 import ControlSection from '../ui/ControlSection'
 import InputGroup from '../ui/InputGroup'
+import ValidatedInput from '../ui/ValidatedInput'
 import RichTextToolbar from '../RichTextToolbar'
 
 const ContentEditor = ({ content, setContent }) => {
@@ -46,7 +47,7 @@ const ContentEditor = ({ content, setContent }) => {
                 </InputGroup>
 
                 <InputGroup label="Avatar URL">
-                    <input
+                    <ValidatedInput
                         className="text-input"
                         value={content.avatarUrl}
                         onChange={(e) => updateContent('avatarUrl', e.target.value)}

@@ -1,0 +1,241 @@
+/* ========================================
+   SHARED EDITOR STYLES & CSS VARIABLES
+   ======================================== */
+
+/* CSS Custom Properties for consistent theming */
+:root {
+    /* Spacing Scale */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 20px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+
+    /* Editor Color Palette */
+    --bg-primary: #1e1e1e;
+    --bg-secondary: #252526;
+    --bg-tertiary: #2d2d2d;
+    --bg-input: #111;
+
+    --border-color: #333;
+    --border-color-light: #444;
+
+    --text-primary: #fff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #ccc;
+    --text-subtle: #888;
+    --text-disabled: #666;
+
+    --accent-primary: #3182CE;
+    --accent-danger: #e53e3e;
+    --accent-success: #48BB78;
+    --accent-pink: #ff0055;
+
+    /* Effects */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-xl: 8px;
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+}
+
+/* ========================================
+   COMMON LAYOUT COMPONENTS
+   ======================================== */
+
+.control-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.control-section label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.sub-label {
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+    color: var(--text-subtle) !important;
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.control-row>span:first-child {
+    min-width: 110px;
+    flex-shrink: 0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-lg) 0;
+}
+
+/* ========================================
+   INPUT COMPONENTS
+   ======================================== */
+
+.input-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.text-input,
+.select-input {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: border-color var(--transition-normal);
+}
+
+.text-input:focus,
+.select-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+}
+
+.text-input:hover,
+.select-input:hover {
+    border-color: var(--border-color-light);
+}
+
+.text-area-input {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+    transition: border-color var(--transition-normal);
+}
+
+.text-area-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+/* ========================================
+   BUTTON GROUPS
+   ======================================== */
+
+.button-group {
+    display: flex;
+    gap: 1px;
+    background: var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.button-group button {
+    flex: 1;
+    background: var(--bg-primary);
+    border: none;
+    color: var(--text-muted);
+    padding: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all var(--transition-normal);
+}
+
+.button-group button:hover {
+    transform: scale(1.02);
+    z-index: 1;
+}
+
+.button-group button.active {
+    background: var(--border-color-light);
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.button-group button:hover:not(.active) {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   MINI CONTROLS
+   ======================================== */
+
+.mini-select,
+.mini-input {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+}
+
+/* ========================================
+   GRID LAYOUTS
+   ======================================== */
+
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* ========================================
+   PICKER WRAPPERS
+   ======================================== */
+
+.picker-wrapper .react-colorful {
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ========================================
+   CODE INPUT
+   ======================================== */
+
+.code-input {
+    width: 100%;
+    min-height: 200px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: #d4d4d4;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    padding: var(--spacing-md);
+    resize: vertical;
+    line-height: 1.5;
+    border-radius: var(--radius-md);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow-x: auto;
+}

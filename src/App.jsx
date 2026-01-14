@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import EditorPanel from './components/Editor/EditorPanel'
 import PreviewPanel from './components/Preview/PreviewPanel'
-import { generateCssFromTheme, defaultTheme } from './utils/CssGenerator'
+import { generateCssFromTheme } from './utils/CssGenerator'
+import { DefaultTheme } from './themes'
+import { ToastProvider } from './context/ToastContext'
+import ToastContainer from './components/Editor/ui/Toast'
+import ErrorBoundary from './components/Editor/ui/ErrorBoundary'
 import './App.css'
 
 // Default mock content
@@ -29,7 +33,7 @@ function App() {
   // Load initial state from localStorage or use defaults
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('anansi-theme')
-    return saved ? JSON.parse(saved) : defaultTheme
+    return saved ? JSON.parse(saved) : DefaultTheme
   })
   const [content, setContent] = useState(() => {
     const saved = localStorage.getItem('anansi-content')
@@ -39,25 +43,25 @@ function App() {
     return localStorage.getItem('anansi-css') || ''
   })
 
-  // Persistence Effects
+  // Persist state
   useEffect(() => {
-    localStorage.setItem('anansi-theme', JSON.stringify(theme))
-  }, [theme])
-
-  useEffect(() => {
-    localStorage.setItem('anansi-content', JSON.stringify(content))
-  }, [content])
-
-  useEffect(() => {
-    localStorage.setItem('anansi-css', manualCSS)
-  }, [manualCSS])
+    try {
+      localStorage.setItem('anansi-theme', JSON.stringify(theme))
+      localStorage.setItem('anansi-content', JSON.stringify(content))
+      localStorage.setItem('anansi-css', manualCSS)
+    } catch (e) {
+      console.error("Failed to save to localStorage:", e)
+      // Check for quota exceeded specific error logic if needed, but a log is sufficient for now
+      // Ideally show a toast, but we are outside the provider context here conveniently
+    }
+  }, [theme, content, manualCSS])
 
   const handleReset = () => {
     if (confirm('Are you sure? This will reset the editor to default values.')) {
       localStorage.removeItem('anansi-theme')
       localStorage.removeItem('anansi-content')
       localStorage.removeItem('anansi-css')
-      setTheme(defaultTheme)
+      setTheme(DefaultTheme)
       setContent(defaultContent)
       setManualCSS('')
     }
@@ -67,21 +71,28 @@ function App() {
   const combinedCSS = `${generateCssFromTheme(theme)}\n${manualCSS}`
 
   return (
-    <div className="app-container">
-      <EditorPanel
-        theme={theme}
-        setTheme={setTheme}
-        content={content}
-        setContent={setContent}
-        manualCSS={manualCSS}
-        setManualCSS={setManualCSS}
-        onReset={handleReset}
-      />
-      <PreviewPanel
-        customCSS={combinedCSS}
-        content={content}
-      />
-    </div>
+    <ToastProvider>
+      <div className="app-container">
+        <ErrorBoundary onReset={() => window.location.reload()}>
+          <EditorPanel
+            theme={theme}
+            setTheme={setTheme}
+            content={content}
+            setContent={setContent}
+            manualCSS={manualCSS}
+            setManualCSS={setManualCSS}
+            onReset={handleReset}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <PreviewPanel
+            customCSS={combinedCSS}
+            content={content}
+          />
+        </ErrorBoundary>
+        <ToastContainer />
+      </div>
+    </ToastProvider>
   )
 }
 

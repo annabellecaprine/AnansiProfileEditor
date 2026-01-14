@@ -5,6 +5,7 @@ import InputGroup from '../../ui/InputGroup'
 import ColorControl from '../../ui/ColorControl'
 import Slider from '../../ui/Slider'
 import Select from '../../ui/Select'
+import ValidatedInput from '../../ui/ValidatedInput'
 
 const ThemeSettings = ({ theme, updateTheme }) => {
     return (
@@ -60,13 +61,12 @@ const ThemeSettings = ({ theme, updateTheme }) => {
             {/* BACKGROUND */}
             <ControlSection label="Page Background" icon={ImageIcon}>
                 <InputGroup label="Image URL">
-                    <input
+                    <ValidatedInput
                         className="text-input"
                         type="text"
                         placeholder="https://..."
                         value={theme.bgImage}
                         onChange={(e) => updateTheme('bgImage', e.target.value)}
-                        style={{ width: '100%' }}
                     />
                 </InputGroup>
             </ControlSection>

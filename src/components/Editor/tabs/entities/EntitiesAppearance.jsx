@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layers, WrapText, Columns, EyeOff, Layout } from 'lucide-react'
 import ControlSection from '../../ui/ControlSection'
+import Slider from '../../ui/Slider'
 
 const EntitiesAppearance = ({ theme, updateEntities }) => {
     return (
@@ -9,14 +10,14 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                 Customize the structure and visibility of card elements.
             </p>
 
-            <div className="control-row">
-                <span>Card Roundness (px)</span>
-                <input
-                    type="range" min="0" max="20"
-                    value={theme.entities?.borderRadius ?? 8}
-                    onChange={(e) => updateEntities('borderRadius', parseInt(e.target.value))}
-                />
-            </div>
+            <Slider
+                label="Card Roundness"
+                value={theme.entities?.borderRadius ?? 8}
+                min={0}
+                max={20}
+                onChange={(val) => updateEntities('borderRadius', val)}
+                unit="px"
+            />
 
             <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <input
@@ -68,18 +69,15 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
 
                 {theme.entities?.layoutMode === 'flex' ? (
                     <>
-                        <div className="control-row">
-                            <span>Card Width (px)</span>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                <input
-                                    type="range" min="100" max="500" step="10"
-                                    style={{ flex: 1 }}
-                                    value={theme.entities?.cardWidth || 300}
-                                    onChange={(e) => updateEntities('cardWidth', parseInt(e.target.value))}
-                                />
-                                <span style={{ minWidth: 30, textAlign: 'right' }}>{theme.entities?.cardWidth || 300}</span>
-                            </div>
-                        </div>
+                        <Slider
+                            label="Card Width"
+                            value={theme.entities?.cardWidth || 300}
+                            min={100}
+                            max={500}
+                            step={10}
+                            onChange={(val) => updateEntities('cardWidth', val)}
+                            unit="px"
+                        />
                         <div className="control-row">
                             <span>Gap (px)</span>
                             <input
@@ -90,21 +88,19 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                         </div>
                     </>
                 ) : (
-                    <div className="control-row">
-                        <span>Columns</span>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <input
-                                type="range" min="1" max="6" step="1"
-                                style={{ flex: 1 }}
-                                value={theme.entities?.gridColumns || 3}
-                                onChange={(e) => updateEntities('gridColumns', parseInt(e.target.value))}
-                            />
-                            <span style={{ minWidth: 30, textAlign: 'right' }}>{theme.entities?.gridColumns || 3}</span>
-                        </div>
+                    <>
+                        <Slider
+                            label="Columns"
+                            value={theme.entities?.gridColumns || 3}
+                            min={1}
+                            max={6}
+                            step={1}
+                            onChange={(val) => updateEntities('gridColumns', val)}
+                        />
                         <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#888' }}>
                             Controls how many cards appear per row.
                         </div>
-                    </div>
+                    </>
                 )}
             </div>
         </ControlSection>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Layout, ArrowRightLeft, ArrowDownUp, Move } from 'lucide-react'
 import ControlSection from '../ui/ControlSection'
+import Select from '../ui/Select'
 import ElementStyler from './layout/ElementStyler'
 
 const LayoutEditor = ({ theme, setTheme }) => {
@@ -68,17 +69,17 @@ const LayoutEditor = ({ theme, setTheme }) => {
             <hr className="divider" />
 
             <ControlSection label="Select Element to Edit" icon={Move}>
-                <select
-                    className="select-input"
+                <Select
                     value={selectedElement}
-                    onChange={(e) => setSelectedElement(e.target.value)}
-                >
-                    <option value="header">Header Container (Avatar + Name)</option>
-                    <option value="avatar">Avatar Image</option>
-                    <option value="info">Name & Username Box</option>
-                    <option value="bio">Bio Section</option>
-                    <option value="stats">Stats Row</option>
-                </select>
+                    onChange={(val) => setSelectedElement(val)}
+                    options={[
+                        { value: "header", label: "Header Container (Avatar + Name)" },
+                        { value: "avatar", label: "Avatar Image" },
+                        { value: "info", label: "Name & Username Box" },
+                        { value: "bio", label: "Bio Section" },
+                        { value: "stats", label: "Stats Row" }
+                    ]}
+                />
             </ControlSection>
 
             {/* DYNAMIC CONTROLS BASED ON SELECTION */}

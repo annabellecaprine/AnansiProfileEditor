@@ -16,6 +16,11 @@ export default function PreviewPanel({ customCSS, content }) {
             {/* Dynamic Style Injection */}
             <style>{customCSS}</style>
 
+            {/* Live Preview Badge */}
+            <div className="preview-badge">
+                <span>Live Preview</span>
+            </div>
+
             {/* FULL PAGE WRAPPER (The Background lives here now) */}
             <div className="pp-page-background profile-page-background css-flhja6">
 

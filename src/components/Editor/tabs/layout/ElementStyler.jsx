@@ -1,6 +1,7 @@
 import React from 'react'
 import { Maximize, Info } from 'lucide-react'
 import ControlSection from '../../ui/ControlSection'
+import Slider from '../../ui/Slider'
 
 const ElementStyler = ({ selectedElement, getLayout, updateLayout }) => {
     return (
@@ -57,25 +58,23 @@ const ElementStyler = ({ selectedElement, getLayout, updateLayout }) => {
             <ControlSection label="Sizing" icon={Maximize}>
                 {selectedElement === 'avatar' && (
                     <>
-                        <div className="control-row">
-                            <span>Size (px)</span>
-                            <input
-                                type="range" min="20" max="300"
-                                value={getLayout(selectedElement).width || 80}
-                                onChange={(e) => {
-                                    updateLayout(selectedElement, 'width', parseInt(e.target.value))
-                                    updateLayout(selectedElement, 'height', parseInt(e.target.value))
-                                }}
-                            />
-                        </div>
-                        <div className="control-row">
-                            <span>Roundness (%)</span>
-                            <input
-                                type="range" min="0" max="50"
-                                value={getLayout(selectedElement).borderRadius || 50}
-                                onChange={(e) => updateLayout(selectedElement, 'borderRadius', parseInt(e.target.value))}
-                            />
-                        </div>
+                        <Slider
+                            label="Size (px)"
+                            value={getLayout(selectedElement).width || 80}
+                            min={20}
+                            max={300}
+                            onChange={(val) => {
+                                updateLayout(selectedElement, 'width', val)
+                                updateLayout(selectedElement, 'height', val)
+                            }}
+                        />
+                        <Slider
+                            label="Roundness (%)"
+                            value={getLayout(selectedElement).borderRadius || 50}
+                            min={0}
+                            max={50}
+                            onChange={(val) => updateLayout(selectedElement, 'borderRadius', val)}
+                        />
                         <div className="input-group">
                             <label className="sub-label">Shape Mask</label>
                             <select
@@ -111,22 +110,20 @@ const ElementStyler = ({ selectedElement, getLayout, updateLayout }) => {
                                 </div>
                             )}
                         </div>
-                        <div className="control-row">
-                            <span>Pos X (%)</span>
-                            <input
-                                type="range" min="0" max="100"
-                                value={getLayout(selectedElement).objectPositionX !== undefined ? getLayout(selectedElement).objectPositionX : 50}
-                                onChange={(e) => updateLayout(selectedElement, 'objectPositionX', parseInt(e.target.value))}
-                            />
-                        </div>
-                        <div className="control-row">
-                            <span>Pos Y (%)</span>
-                            <input
-                                type="range" min="0" max="100"
-                                value={getLayout(selectedElement).objectPositionY !== undefined ? getLayout(selectedElement).objectPositionY : 50}
-                                onChange={(e) => updateLayout(selectedElement, 'objectPositionY', parseInt(e.target.value))}
-                            />
-                        </div>
+                        <Slider
+                            label="Pos X (%)"
+                            value={getLayout(selectedElement).objectPositionX !== undefined ? getLayout(selectedElement).objectPositionX : 50}
+                            min={0}
+                            max={100}
+                            onChange={(val) => updateLayout(selectedElement, 'objectPositionX', val)}
+                        />
+                        <Slider
+                            label="Pos Y (%)"
+                            value={getLayout(selectedElement).objectPositionY !== undefined ? getLayout(selectedElement).objectPositionY : 50}
+                            min={0}
+                            max={100}
+                            onChange={(val) => updateLayout(selectedElement, 'objectPositionY', val)}
+                        />
                     </>
                 )}
                 {selectedElement !== 'avatar' && (

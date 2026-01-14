@@ -2,7 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.0] - 2026-01-14
+## [1.2.0] - 2026-01-14
+### Major Feature Release: Themes, Export & Validation
+This release brings the desktop experience to maturity with a complete Theme System, professional visual polish, and robust error handling.
+
+### Added
+- **Theme Library**:
+  - One-click theme switching (Midnight, Cyberpunk, Rose Garden, Default).
+  - Extensible architecture for easy theme additions.
+  - Visual theme gallery with color previews.
+- **Export Manager**:
+  - New **Export Preview Modal** with syntax highlighting.
+  - **Toast Notifications** for success/error feedback.
+  - Smart clipboard copy and file download options.
+- **Input Validation**:
+  - Automatic URL validation for background/avatar images.
+  - Visual feedback (Success/Error icons) on input fields.
+  - Debounced checking to prevent spamming requests.
+- **Safety & Stability**:
+  - **Error Boundaries**: App no longer crashes on invalid style data; offers a "Reset" option.
+  - **Safe Storage**: Prevents crashes when LocalStorage is full.
+
+### Changed
+- **Visual Polish**:
+  - Completely redesigned "Visual" tab with Accordion-based organization.
+  - Added glassmorphism headers and smoother tab transitions.
+  - Improved contrast on "Rose Garden" theme (switched to dark text).
+- **UX Improvements**:
+  - Removed native browser alerts in favor of Toasts.
+  - Better loading states and button interactions.
+
+
 ### Major Refactoring & Architecture Upgrade
 This release marks a significant overhaul of the internal architecture, moving from a monolithic structure to a modular, component-based system.
 

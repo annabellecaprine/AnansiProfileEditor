@@ -6,6 +6,56 @@
     background: #000;
     /* Fallback */
     font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* "Live Preview" Badge */
+.preview-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.preview-badge::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #48BB78;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #48BB78;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
 }
 
 /* Full Page Background Wrapper */
@@ -19,6 +69,7 @@
     background-attachment: fixed;
     /* Default dark if no image */
     background-color: #0f1115;
+    transition: background 0.3s ease;
 }
 
 /* Main Flex Layout */

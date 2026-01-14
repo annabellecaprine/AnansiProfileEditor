@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Palette, Code, Layers, User, Layout, Download, Info, RotateCcw } from 'lucide-react'
 import { generateCssFromTheme } from '../../utils/CssGenerator'
+import Button from './ui/Button'
+import ExportModal from './ui/ExportModal'
+import './EditorShared.css'
 import './EditorPanel.css'
 
 import VisualEditor from './tabs/VisualEditor'
@@ -10,24 +13,29 @@ import EntitiesEditor from './tabs/EntitiesEditor'
 
 export default function EditorPanel({ theme, setTheme, content, setContent, manualCSS, setManualCSS, onReset }) {
     const [activeTab, setActiveTab] = useState('visual')
-    const [copyFeedback, setCopyFeedback] = useState(false)
     const [showAbout, setShowAbout] = useState(false)
+    const [showExport, setShowExport] = useState(false)
 
-    const handleExport = () => {
-        const generated = generateCssFromTheme(theme)
-        const cssBlock = `<style>\n${generated}\n${manualCSS || ''}\n</style>`
-        const fullExport = `${cssBlock}\n\n${content.bio || ''}`
+    // Keyboard shortcut for Export (Ctrl/Cmd + E)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                e.preventDefault()
+                setShowExport(true)
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [])
 
-        navigator.clipboard.writeText(fullExport).then(() => {
-            setCopyFeedback(true)
-            setTimeout(() => setCopyFeedback(false), 2000)
-        })
+    const handleExportClick = () => {
+        setShowExport(true)
     }
 
     return (
         <div className="editor-panel">
             <header className="editor-header">
-                <h1>Anansi Editor</h1>
+                <h1>Profile CSS Editor</h1>
                 <div className="tabs">
                     <button className={activeTab === 'visual' ? 'active' : ''} onClick={() => setActiveTab('visual')}>
                         <Palette size={16} /> <span className="tab-text">Style</span>
@@ -46,23 +54,27 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                     </button>
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
-                    <button
+                    <Button
                         onClick={() => setShowAbout(true)}
                         title="About & Credits"
-                        style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: '#4A5568', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}
-                    >
-                        <Info size={16} />
-                    </button>
-                    <button
+                        icon={Info}
+                        variant="default"
+                    />
+                    <Button
                         onClick={onReset}
                         title="Reset to Default"
-                        style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: '#e53e3e', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}
+                        icon={RotateCcw}
+                        variant="danger"
+                    />
+                    <Button
+                        onClick={handleExportClick}
+                        title="Export Code (Ctrl+E)"
+                        icon={Download}
+                        variant="default"
+                        style={{ background: 'var(--accent-primary)', color: 'white' }}
                     >
-                        <RotateCcw size={16} />
-                    </button>
-                    <button className={`export-btn ${copyFeedback ? 'success' : ''}`} onClick={handleExport} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: copyFeedback ? '#48BB78' : '#3182CE', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}>
-                        {copyFeedback ? <span style={{ fontSize: 14 }}>Copied!</span> : <><Download size={16} /> <span className="tab-text">Export</span></>}
-                    </button>
+                        <span className="tab-text">Export</span>
+                    </Button>
                 </div>
             </header>
 
@@ -104,10 +116,20 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
 
             </div>
 
+            {/* MODALS */}
+            {showExport && (
+                <ExportModal
+                    isOpen={showExport}
+                    onClose={() => setShowExport(false)}
+                    cssContent={`${generateCssFromTheme(theme)}\n${manualCSS || ''}`}
+                    profileContent={content}
+                />
+            )}
+
             {showAbout && (
                 <div className="modal-overlay" onClick={() => setShowAbout(false)}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <h2>About Anansi Profile Editor</h2>
+                        <h2>About Profile CSS Editor</h2>
                         <p>A specialized tool for creating beautiful, customized styling for JanitorAI profiles.</p>
                         <hr style={{ borderColor: '#4A5568', margin: '16px 0' }} />
                         <p><strong>Created by:</strong> <span style={{ color: '#F687B3' }}>Annabelle Caprine</span></p>

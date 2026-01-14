@@ -9,8 +9,27 @@
 - **Global Theme Control**:
   - **Accent Color**: Sets the primary highlight color for borders, badges, and glows.
   - **Text Color**: Overrides default text color for all profile elements.
-  - **Backgrounds**: Set custom page background images and card background colors with adjustable opacity and blur.
-- **Advanced Layout Engine**:
+    - **Backgrounds**: Set custom page background images and card background colors with adjustable opacity and blur.
+
+## 🎨 Theme Library
+- **One-Click Templates**: Instantly switch between professionally curated looks:
+  - **Midnight**: sleek, dark, and professional.
+  - **Cyberpunk**: high-contrast neon aesthetics.
+  - **Rose Garden**: soft, readable pastel vibes.
+- **Instant Preview**: See how a theme looks before fully committing.
+- **Extensible**: Designed to allow easy addition of custom community themes.
+
+## 📤 Professional Export
+- **Smart Modal**: Review your generated CSS code before exporting.
+- **Backup Options**: Download your theme as a `.css` file or raw JSON backup.
+- **Clipboard Integration**: One-click copy with instant "Toast" feedback.
+
+## 🛡️ Validation & Safety
+- **URL Checker**: Automatically verifies image URLs (Avatar, Background) to prevent broken layouts.
+- **Crash Protection**: Built-in error boundaries ensure a typo doesn't break the app.
+- **Visual Feedback**: Clear indicators (✅/❌) show you exactly what's working.
+
+## Advanced Layout Engine
   - **Flexbox Controls**: Fine-tune the alignment (Row/Col, Start/Center/End) of the Header, Bio, and Stats sections.
   - **Spacing**: precise margin and padding controls.
   - **Sizing**: Adjustable sizing for avatars and containers.
