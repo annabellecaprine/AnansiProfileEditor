@@ -416,18 +416,94 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                         {/* CARD BACKGROUND */}
                         <div className="control-section">
                             <label><Palette size={14} /> Card Background</label>
+
+                            {/* Transparency Toggle */}
+                            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                                <input
+                                    type="checkbox"
+                                    id="chk-transparent"
+                                    checked={theme.transparentCard || false}
+                                    onChange={(e) => updateTheme('transparentCard', e.target.checked)}
+                                />
+                                <label htmlFor="chk-transparent" style={{ margin: 0, fontWeight: 400 }}>Transparent Card</label>
+                            </div>
+
                             <ColorControl
                                 label="Color"
                                 color={theme.cardBgColor || '#1A202C'}
                                 onChange={(c) => updateTheme('cardBgColor', c)}
                             />
+
                             <div className="control-row">
                                 <span>Opacity</span>
                                 <input
                                     type="range" min="0" max="1" step="0.05"
                                     value={theme.bgOpacity}
+                                    disabled={theme.transparentCard}
                                     onChange={(e) => updateTheme('bgOpacity', parseFloat(e.target.value))}
                                 />
+                            </div>
+
+                            <div className="input-group">
+                                <label className="sub-label">Gradient Overlay</label>
+                                <select
+                                    className="text-input"
+                                    value={theme.cardGradient || ''}
+                                    onChange={(e) => updateTheme('cardGradient', e.target.value)}
+                                >
+                                    <option value="">None</option>
+                                    <option value="linear-gradient(45deg, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">Subtle Red-Blue</option>
+                                    <option value="linear-gradient(to bottom, transparent, rgba(0,0,0,0.8))">Fade to Black</option>
+                                    <option value="linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)">Glass Shine</option>
+                                    <option value="repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 10px, transparent 10px, transparent 20px)">Stripes</option>
+                                    <option value="radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)">Spotlight</option>
+                                    <option value="conic-gradient(from 0deg at 50% 50%, rgba(255,0,0,0.1), rgba(0,255,0,0.1), rgba(0,0,255,0.1), rgba(255,0,0,0.1))">Rainbow Spin</option>
+                                </select>
+                            </div>
+
+                            <div className="control-row">
+                                <span>Blur (Backdrop)</span>
+                                <input
+                                    type="range" min="0" max="20"
+                                    value={theme.blur}
+                                    onChange={(e) => updateTheme('blur', parseInt(e.target.value))}
+                                />
+                            </div>
+                        </div>
+
+                        <hr className="divider" />
+
+                        {/* SHADOWS & DEPTH */}
+                        <div className="control-section">
+                            <label><Layers size={14} /> Shadows & Depth</label>
+
+                            <div className="input-group">
+                                <label className="sub-label">Text Shadow (Neon)</label>
+                                <select
+                                    className="text-input"
+                                    value={theme.textShadow || ''}
+                                    onChange={(e) => updateTheme('textShadow', e.target.value)}
+                                >
+                                    <option value="">None</option>
+                                    <option value={`0 0 5px ${theme.accentColor}, 0 0 10px ${theme.accentColor}`}>Neon Glow (Accent)</option>
+                                    <option value="1px 1px 2px rgba(0,0,0,0.8)">Hard Drop Shadow</option>
+                                    <option value="0 0 8px rgba(255,255,255,0.6)">Soft White Halo</option>
+                                </select>
+                            </div>
+
+                            <div className="input-group">
+                                <label className="sub-label">Box Shadow</label>
+                                <select
+                                    className="text-input"
+                                    value={theme.boxShadow || ''}
+                                    onChange={(e) => updateTheme('boxShadow', e.target.value)}
+                                >
+                                    <option value="">Default (Glow)</option>
+                                    <option value="0 10px 30px rgba(0,0,0,0.5)">Deep Drop Shadow</option>
+                                    <option value="0 20px 50px rgba(0,0,0,0.8)">Abyssal Depth</option>
+                                    <option value="0 0 0 1px rgba(255,255,255,0.2)">Thine Outline</option>
+                                    <option value="none">Flat (No Shadow)</option>
+                                </select>
                             </div>
                         </div>
                     </div>

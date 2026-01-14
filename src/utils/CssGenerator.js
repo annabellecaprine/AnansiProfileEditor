@@ -105,17 +105,27 @@ export function generateCssFromTheme(theme) {
   }
 
   const bgRgb = hexToRgb(cardBgColor || '#1A202C');
+  const isTransparent = theme.transparentCard;
 
   cssParts.push(`
 /* Main Card Styling */
 .pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
   border-color: ${accentColor} !important;
-  box-shadow: 0 0 ${theme.glowIntensity}px ${accentColor}40 !important;
+  box-shadow: ${theme.boxShadow || `0 0 ${theme.glowIntensity}px ${accentColor}40`} !important;
   border-radius: ${borderRadius}px !important;
   backdrop-filter: blur(${blur}px);
-  /* Use bgOpacity for the card translucency */
-  background-color: rgba(${bgRgb}, ${bgOpacity}) !important;
-}`);
+  /* Use bgOpacity for the card translucency, or 0 if transparent mode is on */
+  background-color: ${isTransparent ? 'rgba(0,0,0,0)' : `rgba(${bgRgb}, ${bgOpacity})`} !important;
+  /* Optional Gradient Overlay */
+  ${theme.cardGradient ? `background-image: ${theme.cardGradient} !important;` : ''}
+}
+/* Text Shadow Override */
+${theme.textShadow ? `
+.pp-page-background * {
+    text-shadow: ${theme.textShadow} !important;
+}
+` : ''}
+`);
 
 
   // ==========================================
@@ -370,6 +380,10 @@ export const defaultTheme = {
   blur: 0,
   borderRadius: 12,
   glowIntensity: 15,
+  transparentCard: false,
+  cardGradient: '',
+  boxShadow: '',
+  textShadow: '',
   fontFamily: 'Inter',
   hideStats: false,
   hideBadges: false,
