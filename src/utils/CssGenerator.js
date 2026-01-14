@@ -23,12 +23,6 @@ export function generateCssFromTheme(theme) {
   // 0. BASE VARIABLES & STRUCTURAL RESETS
   // ==========================================
   cssParts.push(`
-:root {
-  --chakra-colors-gray-800: #1A202C;
-  --chakra-colors-whiteAlpha-900: ${theme.textColor || 'rgba(255, 255, 255, 0.92)'};
-  --chakra-colors-whiteAlpha-600: ${theme.textColor ? theme.textColor + 'cc' : 'rgba(255, 255, 255, 0.48)'};
-}
-
 /* Base Profile Page Defaults */
 .pp-page-background {
     width: 100%;
@@ -88,7 +82,7 @@ export function generateCssFromTheme(theme) {
   // We target .pp-page-background for the full page effect.
   if (bgImage) {
     cssParts.push(`
-.pp-page-background, .profile-page-background {
+.pp-page-background {
     background-image: url('${bgImage}') !important;
     background-size: cover;
     background-position: center;
@@ -111,7 +105,7 @@ export function generateCssFromTheme(theme) {
 
   cssParts.push(`
 /* Main Card Styling */
-.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+.pp-uc-background {
   border-color: ${accentColor} !important;
   box-shadow: ${theme.boxShadow || `0 0 ${theme.glowIntensity}px ${accentColor}40`} !important;
   border-radius: ${borderRadius}px !important;
@@ -140,7 +134,7 @@ ${theme.textShadow ? `
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
 }
-.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+.pp-uc-background {
     animation: ppFloat 6s ease-in-out infinite !important;
 }
 `);
@@ -153,7 +147,7 @@ ${theme.textShadow ? `
     50% { box-shadow: 0 0 ${parseInt(theme.glowIntensity) + 15}px ${accentColor}80; }
     100% { box-shadow: 0 0 ${theme.glowIntensity}px ${accentColor}40; }
 }
-.pp-uc-background, .profile-uc-background-flex, .css-1xdsfqv {
+.pp-uc-background {
     animation: ppPulse 3s infinite !important;
 }
 `);
@@ -214,7 +208,7 @@ ${theme.textShadow ? `
 `);
 
   cssParts.push(genLayoutBlock('.pp-uc-background .css-1fd6h3f', layout.header));
-  cssParts.push(genLayoutBlock('.pp-uc-avatar, .profile-avatar', layout.avatar));
+  cssParts.push(genLayoutBlock('.pp-uc-avatar', layout.avatar));
 
   const avatar = layout.avatar || {};
   // Avatar Object Position
@@ -256,11 +250,11 @@ ${theme.textShadow ? `
   }
 
   cssParts.push(`
-img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
+img.pp-uc-avatar {
   ${avatarRules.join('\n  ')}
 }
 /* Ensure the container matches the image size so it reserves space in the flex row */
-.pp-uc-avatar-container, .profile-avatar-container {
+.pp-uc-avatar-container {
     width: ${avatar.width !== undefined ? avatar.width : 100}px !important;
     height: ${avatar.height !== undefined ? avatar.height : 100}px !important;
     flex-shrink: 0 !important;
@@ -269,7 +263,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
 `);
 
   cssParts.push(genLayoutBlock('.css-1uodvt1', layout.info));
-  cssParts.push(genLayoutBlock('.pp-uc-about-me, .profile-about-me', layout.bio));
+  cssParts.push(genLayoutBlock('.pp-uc-about-me', layout.bio));
   cssParts.push(genLayoutBlock('.stats-row', layout.stats));
 
 
@@ -282,7 +276,6 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
   // Using stable classes found in live site: .pp-cc-avatar, .profile-character-card-avatar-image
   cssParts.push(`
 /* Character Card Image & Wrapper */
-.profile-character-card-avatar-aspect-ratio, 
 .pp-cc-avatar {
   border-radius: ${entities.borderRadius !== undefined ? entities.borderRadius : 2}px !important;
   transition: all 0.2s ease !important;
@@ -293,12 +286,11 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
   if (entities.grayscale) {
     cssParts.push(`
 /* Grayscale Effect */
-.pp-cc-avatar, .profile-character-card-avatar-image {
+.pp-cc-avatar {
     filter: grayscale(1);
     transition: filter 0.3s ease;
 }
-.profile-character-card-avatar-aspect-ratio:hover .pp-cc-avatar,
-.profile-character-card-avatar-aspect-ratio:hover .profile-character-card-avatar-image {
+.pp-cc-avatar-container:hover .pp-cc-avatar {
     filter: grayscale(0);
 }
 `);
@@ -314,11 +306,11 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
     from { left: -75%; }
     to { left: 125%; }
 }
-.css-zgqw37, .css-6pkpcc, .pp-cc-name, .profile-character-card-name {
+.pp-cc-name {
     position: relative;
     overflow: hidden;
 }
-.css-zgqw37::before, .css-6pkpcc::before, .pp-cc-name::before, .profile-character-card-name::before {
+.pp-cc-name::before {
     content: '';
     position: absolute;
     top: 0;
@@ -334,7 +326,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
     transform: skewX(-20deg);
 }
 /* Trigger sheen on hover of the avatar container or the name tag itself */
-.profile-character-card-avatar-aspect-ratio:hover ~ * .pp-cc-name::before,
+.pp-cc-avatar-container:hover ~ * .pp-cc-name::before,
 .pp-cc-name:hover::before {
     animation: sheenMove 1s forwards;
 }
@@ -345,7 +337,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
   if (entities.hideCreator) {
     cssParts.push(`
 /* Hide Creator Name */
-.css-1m0lwfp, .css-vquwtv, .pp-cc-creator {
+.pp-cc-creator {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -359,14 +351,14 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
     const gap = entities.gap !== undefined ? entities.gap : 16;
     cssParts.push(`
 /* Flex Layout for Cards */
-.pp-cc-list-container, .css-16g5xvc {
+.pp-cc-list-container {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: ${gap}px !important;
     width: 100% !important;
 }
 /* Target direct children (cards) */
-.pp-cc-list-container > *, .css-16g5xvc > * {
+.pp-cc-list-container > * {
     width: ${cardWidth}px !important;
     flex: 1 1 ${cardWidth}px !important;
     max-width: 100% !important;
@@ -378,7 +370,7 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
     if (gridCols) {
       cssParts.push(`
 /* Force Grid Columns */
-.pp-cc-list-container, .css-16g5xvc {
+.pp-cc-list-container {
     display: grid !important;
     grid-template-columns: repeat(${gridCols}, 1fr) !important;
     width: 100% !important;
@@ -399,8 +391,8 @@ img.pp-uc-avatar, img.profile-avatar, .pp-uc-avatar, .profile-avatar {
 
   if (hideStats) {
     cssParts.push(`
-.pp-uc-followers-count, .profile-followers-count,
-.pp-uc-following-count, .profile-following-count {
+.pp-uc-followers-count,
+.pp-uc-following-count {
   display: none !important;
 }`);
   }

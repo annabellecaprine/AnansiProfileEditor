@@ -311,6 +311,17 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                                                 <option value="circle(50% at 50% 50%)">Circle (Default)</option>
                                             </optgroup>
                                         </select>
+                                        {getLayout(selectedElement).clipPath?.includes('url') && (
+                                            <div style={{ marginTop: 8, padding: 8, background: '#4a151b', borderRadius: 4, border: '1px solid #751a23' }}>
+                                                <p style={{ margin: 0, fontSize: '0.75rem', color: '#feb2b2', display: 'flex', gap: 6 }}>
+                                                    <Info size={12} style={{ flexShrink: 0, marginTop: 2 }} />
+                                                    <span>
+                                                        <b>Warning:</b> SVG Masks use <code>url()</code> which J.AI may strip.
+                                                        If this fails to load on the live site, try Geometric shapes instead.
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="control-row">
                                         <span>Pos X (%)</span>
