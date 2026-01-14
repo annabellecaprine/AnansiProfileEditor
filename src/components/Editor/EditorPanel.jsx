@@ -860,7 +860,7 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                         <h3 style={{ fontSize: '1rem', color: '#E2E8F0', marginBottom: 8 }}>Special Thanks</h3>
                         <p style={{ color: '#CBD5E0', fontSize: '0.9rem', lineHeight: '1.5' }}>
                             This product would not be possible if not for these awesome folks:<br />
-                            <strong style={{ color: theme.accentColor }}>RaeRae</strong>, <strong style={{ color: theme.accentColor }}>Puppy</strong>, <strong style={{ color: theme.accentColor }}>Lav</strong>,<br />
+                            <strong style={{ color: theme.accentColor }}>RaeRae</strong>, <strong style={{ color: theme.accentColor }}>Puppy</strong>, <strong style={{ color: theme.accentColor }}>Lav</strong>, <strong style={{ color: theme.accentColor }}>Tigerdropped</strong>,<br />
                             and the entire <strong>JAI CSS Community</strong>.
                         </p>
 
