@@ -4,6 +4,7 @@ import ControlSection from '../ui/ControlSection'
 import InputGroup from '../ui/InputGroup'
 import ValidatedInput from '../ui/ValidatedInput'
 import RichTextToolbar from '../RichTextToolbar'
+import ImageInput from '../ui/ImageInput'
 
 const ContentEditor = ({ content, setContent }) => {
 
@@ -47,7 +48,7 @@ const ContentEditor = ({ content, setContent }) => {
                 </InputGroup>
 
                 <InputGroup label="Avatar URL">
-                    <ValidatedInput
+                    <ImageInput
                         className="text-input"
                         value={content.avatarUrl}
                         onChange={(e) => updateContent('avatarUrl', e.target.value)}

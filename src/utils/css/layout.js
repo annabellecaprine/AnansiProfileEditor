@@ -100,6 +100,16 @@ img.pp-uc-avatar {
     cssParts.push(genLayoutBlock('.pp-uc-about-me', layout.bio));
     cssParts.push(genLayoutBlock('.stats-row', layout.stats));
 
+    // Fallback for J.AI where .stats-row might not exist on the container
+    if (layout.stats && layout.stats.gap) {
+        cssParts.push(`
+/* Fallback Spacing for Stats */
+.pp-uc-followers-count {
+    margin-right: ${layout.stats.gap}px !important;
+}
+`);
+    }
+
     // Center Profile Info
     if (theme.centerInfo) {
         cssParts.push(`

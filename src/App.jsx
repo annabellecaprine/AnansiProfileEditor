@@ -8,6 +8,8 @@ import ToastContainer from './components/Editor/ui/Toast'
 import ErrorBoundary from './components/Editor/ui/ErrorBoundary'
 import ResizableLayout from './components/Layout/ResizableLayout'
 import ConfirmationModal from './components/Editor/ui/ConfirmationModal'
+import { downloadProjectAsJson, parseProjectFile } from './utils/projectManagement'
+import useHistory from './hooks/useHistory'
 import './App.css'
 
 // Default mock content
@@ -38,18 +40,25 @@ const defaultContent = {
 }
 
 function App() {
-  // Load initial state from localStorage or use defaults
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('anansi-theme')
-    return saved ? JSON.parse(saved) : DefaultTheme
+  // Initialize History State
+  const [appState, setAppState, undo, redo, canUndo, canRedo, setProject] = useHistory(() => {
+    const savedTheme = localStorage.getItem('anansi-theme')
+    const savedContent = localStorage.getItem('anansi-content')
+    const savedCSS = localStorage.getItem('anansi-css')
+    return {
+      theme: savedTheme ? JSON.parse(savedTheme) : DefaultTheme,
+      content: savedContent ? JSON.parse(savedContent) : defaultContent,
+      manualCSS: savedCSS || ''
+    }
   })
-  const [content, setContent] = useState(() => {
-    const saved = localStorage.getItem('anansi-content')
-    return saved ? JSON.parse(saved) : defaultContent
-  })
-  const [manualCSS, setManualCSS] = useState(() => {
-    return localStorage.getItem('anansi-css') || ''
-  })
+
+  // Destructure for ease of use
+  const { theme, content, manualCSS } = appState
+
+  // Helper Setters to maintain prop compatibility
+  const setTheme = (val) => setAppState(prev => ({ ...prev, theme: typeof val === 'function' ? val(prev.theme) : val }))
+  const setContent = (val) => setAppState(prev => ({ ...prev, content: typeof val === 'function' ? val(prev.content) : val }))
+  const setManualCSS = (val) => setAppState(prev => ({ ...prev, manualCSS: typeof val === 'function' ? val(prev.manualCSS) : val }))
 
   // Modal State
   const [isResetModalOpen, setIsResetModalOpen] = useState(false)
@@ -57,15 +66,13 @@ function App() {
   // Persist state
   useEffect(() => {
     try {
-      localStorage.setItem('anansi-theme', JSON.stringify(theme))
-      localStorage.setItem('anansi-content', JSON.stringify(content))
-      localStorage.setItem('anansi-css', manualCSS)
+      localStorage.setItem('anansi-theme', JSON.stringify(appState.theme))
+      localStorage.setItem('anansi-content', JSON.stringify(appState.content))
+      localStorage.setItem('anansi-css', appState.manualCSS)
     } catch (e) {
       console.error("Failed to save to localStorage:", e)
-      // Check for quota exceeded specific error logic if needed, but a log is sufficient for now
-      // Ideally show a toast, but we are outside the provider context here conveniently
     }
-  }, [theme, content, manualCSS])
+  }, [appState])
 
   const triggerReset = () => setIsResetModalOpen(true)
 
@@ -73,9 +80,20 @@ function App() {
     localStorage.removeItem('anansi-theme')
     localStorage.removeItem('anansi-content')
     localStorage.removeItem('anansi-css')
-    setTheme(DefaultTheme)
-    setContent(defaultContent)
-    setManualCSS('')
+    // Reset via History to allow Undo!
+    setAppState(prev => ({
+      theme: DefaultTheme,
+      content: defaultContent,
+      manualCSS: ''
+    }))
+  }
+
+  const handleLoadProject = (projectData) => {
+    setProject({
+      theme: projectData.theme || DefaultTheme,
+      content: projectData.content || defaultContent,
+      manualCSS: projectData.manualCSS || ''
+    })
   }
 
   // Combine generated CSS with manual overrides
@@ -94,6 +112,12 @@ function App() {
               manualCSS={manualCSS}
               setManualCSS={setManualCSS}
               onReset={triggerReset}
+              onSaveProject={() => downloadProjectAsJson(theme, content, manualCSS)}
+              onLoadProject={handleLoadProject}
+              onUndo={undo}
+              onRedo={redo}
+              canUndo={canUndo}
+              canRedo={canRedo}
             />
           </ErrorBoundary>
         }

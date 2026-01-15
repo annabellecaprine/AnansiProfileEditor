@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-01-14
+### Major Feature Release: Advanced Editor Tools
+This release transforms the editor into a powerful professional tool with project state management, history controls, and rapid prototyping features.
+
+### Added
+- **Project Management**:
+  - **Save Project**: Export your entire workspace (Theme + Content + Manual CSS) to a JSON file.
+  - **Load Project**: Restore your workspace state instantly from a backup file.
+- **History Control**:
+  - **Undo/Redo**: Full history stack support. Recover from accidental changes or experiment freely with new designs.
+  - **Keyboard Shortcuts**: `Ctrl+Z` (Undo), `Ctrl+Y` (Redo), `Ctrl+E` (Export).
+- **Asset Handling**:
+  - **Drag & Drop Images**: Direct support for local images in "Avatar" and "Page Background" fields. Creates a temporary blob URL for instant preview testing.
+- **Smart CSS Editor**:
+  - Replaced the basic textarea with a line-numbered, syntax-highlighting code editor.
+  - Added snippets for common J.AI classes.
+
+### Fixed
+- **UI Regressions**:
+  - Restored proper spacing for "Followers" counts (added fallback CSS).
+  - Fixed "Card Height" control not applying to grid items.
+  - Separated "Panel Background" and "Card Background" color controls.
+- **Naming**: Reverted application branding to generic "Profile Editor".
+
 ## [1.3.0] - 2026-01-14
 ### Major Feature Release: Layout & Preview Engine Overhaul
 This release introduces a professional-grade workspace with a resizable split-pane layout, device simulation for responsive testing, and enhanced preview accuracy.

@@ -9,6 +9,13 @@ export const genEntitiesCss = (theme) => {
   border-radius: ${entities.borderRadius !== undefined ? entities.borderRadius : 2}px !important;
   transition: all 0.2s ease !important;
 }
+
+/* Force Card Height */
+.pp-cc-list-container > * {
+    height: ${entities.cardHeight || 400}px !important;
+    min-height: ${entities.cardHeight || 400}px !important;
+    overflow: hidden;
+}
 `);
 
   // Grayscale Effect
@@ -96,7 +103,8 @@ ${selector} .pp-cc-avatar,
 
   // Tigerdropped's Flip Card Design
   if (entities.flipCard) {
-    const cardBgColor = theme.cardBgColor || '#1A202C';
+    // Priority: Character Color -> Card Color -> Default
+    const cardBgColor = theme.charBgColor || theme.cardBgColor || '#1A202C';
     const tagColor = theme.accentColor || '#111';
 
     cssParts.push(`

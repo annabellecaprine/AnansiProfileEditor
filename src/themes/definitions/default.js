@@ -1,6 +1,6 @@
 export const DefaultTheme = {
     id: 'default',
-    name: 'Anansi Default',
+    name: 'Default Theme',
     author: 'System',
     accentColor: '#ff0055',
     cardBgColor: '#1A202C',
@@ -22,7 +22,7 @@ export const DefaultTheme = {
         avatar: { width: 80, widthUnit: 'px', height: 80, heightUnit: 'px', borderRadius: 50, objectPositionX: 50, objectPositionY: 50 },
         info: { textAlign: 'left' },
         bio: { textAlign: 'left', padding: 0 },
-        stats: { display: 'flex', justifyContent: 'flex-start', marginTop: 20 }
+        stats: { display: 'flex', justifyContent: 'flex-start', marginTop: 20, gap: 20 }
     },
     entities: {
         borderRadius: 8,

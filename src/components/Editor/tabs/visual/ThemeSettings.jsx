@@ -6,6 +6,7 @@ import ColorControl from '../../ui/ColorControl'
 import Slider from '../../ui/Slider'
 import Select from '../../ui/Select'
 import ValidatedInput from '../../ui/ValidatedInput'
+import ImageInput from '../../ui/ImageInput'
 
 const ThemeSettings = ({ theme, updateTheme }) => {
     return (
@@ -17,6 +18,20 @@ const ThemeSettings = ({ theme, updateTheme }) => {
                     color={theme.accentColor}
                     onChange={(c) => updateTheme('accentColor', c)}
                 />
+
+                <ColorControl
+                    label="Panel Background"
+                    color={theme.panelBgColor || theme.cardBgColor || '#1A202C'}
+                    onChange={(c) => updateTheme('panelBgColor', c)}
+                />
+
+                <ColorControl
+                    label="Card Background"
+                    color={theme.charBgColor || theme.cardBgColor || '#1A202C'}
+                    onChange={(c) => updateTheme('charBgColor', c)}
+                />
+
+                <hr className="divider" />
 
                 <Select
                     label="Font Family"
@@ -61,8 +76,7 @@ const ThemeSettings = ({ theme, updateTheme }) => {
             {/* BACKGROUND */}
             <ControlSection label="Page Background" icon={ImageIcon}>
                 <InputGroup label="Image URL">
-                    <ValidatedInput
-                        className="text-input"
+                    <ImageInput
                         type="text"
                         placeholder="https://..."
                         value={theme.bgImage}

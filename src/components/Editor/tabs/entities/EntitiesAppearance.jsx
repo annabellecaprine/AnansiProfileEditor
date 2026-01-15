@@ -19,6 +19,16 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                 unit="px"
             />
 
+            <Slider
+                label="Card Height"
+                value={theme.entities?.cardHeight || 400}
+                min={200}
+                max={800}
+                step={10}
+                onChange={(val) => updateEntities('cardHeight', val)}
+                unit="px"
+            />
+
             <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <input
                     type="checkbox"

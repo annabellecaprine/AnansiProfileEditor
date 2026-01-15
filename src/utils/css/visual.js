@@ -4,6 +4,7 @@ export const genVisualCss = (theme) => {
     const {
         accentColor,
         cardBgColor,
+        panelBgColor,
         bgImage,
         bgOpacity,
         blur,
@@ -14,7 +15,8 @@ export const genVisualCss = (theme) => {
     } = theme;
 
     const cssParts = [];
-    const bgRgb = hexToRgb(cardBgColor || '#1A202C');
+    // Priority: Panel Color -> Card Color -> Default
+    const bgRgb = hexToRgb(panelBgColor || cardBgColor || '#1A202C');
     const isTransparent = theme.transparentCard;
 
     // 0. BASE VARIABLES & STRUCTURAL RESETS

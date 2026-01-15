@@ -20,6 +20,7 @@
   - **Cyberpunk**: high-contrast neon aesthetics.
   - **Rose Garden**: soft, readable pastel vibes.
 - **Instant Preview**: See how a theme looks before fully committing.
+- **Drag & Drop Assets**: Drop local images directly onto input fields to test avatars and backgrounds instantly.
 - **Extensible**: Designed to allow easy addition of custom community themes.
 
 ## 📤 Professional Export
@@ -28,6 +29,8 @@
 - **Clipboard Integration**: One-click copy with instant "Toast" feedback.
 
 ## 🛡️ Validation & Safety
+- **Undo/Redo History**: Made a mistake? Step back in time with full history support.
+- **Project Backups**: Save your entire workspace as a JSON file to keep your designs safe.
 - **URL Checker**: Automatically verifies image URLs (Avatar, Background) to prevent broken layouts.
 - **Crash Protection**: Built-in error boundaries ensure a typo doesn't break the app.
 - **Visual Feedback**: Clear indicators (✅/❌) show you exactly what's working.
