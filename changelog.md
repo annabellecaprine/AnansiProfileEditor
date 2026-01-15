@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-01-14
+### Major Feature Release: Layout & Preview Engine Overhaul
+This release introduces a professional-grade workspace with a resizable split-pane layout, device simulation for responsive testing, and enhanced preview accuracy.
+
+### Added
+- **Layout Engine**:
+  - **Resizable Split Pane**: Drag to adjust the Editor/Preview ratio.
+  - **Collapsible Sidebar**: Easily toggle the editor for a full-screen preview.
+  - **Persistent State**: Remembers your preferred layout width.
+- **Preview Enhancements**:
+  - **Device Toolbar**: Buttons to simulate Mobile (375px), Tablet (768px), and Desktop viewports.
+  - **Open in New Window**: One-click to view your profile in a fresh browser popup for final verification.
+  - **Wider Canvas**: Preview area matches modern wide-screen standards (95% width).
+- **UI & UX**:
+  - **Confirmation Modals**: Replaced native browser alerts with custom, non-intrusive React modals (Reset Button).
+  - **Text Handling**: Improved Bio text area to respect line breaks (`\n`) automatically while preserving HTML compatibility.
+
+### Fixed
+- **Flip Card Layout**: Resolved overflow issues where the avatar or header text would be cut off.
+- **Tab Overflow**: Editor tabs now scroll horizontally on smaller screens instead of being cut off.
+- **CSS Syntax**: Fixed nested rule error that prevented Bio improvements from applying.
+
 ## [1.2.0] - 2026-01-14
 ### Major Feature Release: Themes, Export & Validation
 This release brings the desktop experience to maturity with a complete Theme System, professional visual polish, and robust error handling.

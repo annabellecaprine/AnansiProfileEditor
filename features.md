@@ -2,6 +2,9 @@
 
 ## Core Capabilities
 - **Real-Time Visual Editor**: See changes instantly as you edit your profile theme.
+- **Resizable Layout**: Drag-and-drop split pane with collapsible sidebar for customized workspace.
+- **Device Emulation**: Test your design on Mobile, Tablet, and Desktop viewports instantly.
+- **Open in New Window**: Create a standalone snapshot for full-screen verification.
 - **One-Click Export**: Generates a single block of optimized CSS + HTML ready to paste directly into JanitorAI's "Bio" field.
 - **State Persistence**: Automatically saves your work (theme, content, CSS) locally, so you never lose progress.
 

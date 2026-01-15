@@ -6,6 +6,8 @@ import { DefaultTheme } from './themes'
 import { ToastProvider } from './context/ToastContext'
 import ToastContainer from './components/Editor/ui/Toast'
 import ErrorBoundary from './components/Editor/ui/ErrorBoundary'
+import ResizableLayout from './components/Layout/ResizableLayout'
+import ConfirmationModal from './components/Editor/ui/ConfirmationModal'
 import './App.css'
 
 // Default mock content
@@ -25,7 +27,13 @@ const defaultContent = {
     { name: 'Coffee Shop AU', tags: ['Slice of Life', 'Fluff'], image: 'https://picsum.photos/seed/3/300/400' },
     { name: 'Mafia Boss', tags: ['Dead Dove', 'Drama'], image: 'https://picsum.photos/seed/4/300/400' },
     { name: 'Study Buddy', tags: ['Wholesome', 'School'], image: 'https://picsum.photos/seed/5/300/400' },
-    { name: 'Eldritch Horror', tags: ['Horror', 'Monster'], image: 'https://picsum.photos/seed/6/300/400' }
+    { name: 'Eldritch Horror', tags: ['Horror', 'Monster'], image: 'https://picsum.photos/seed/6/300/400' },
+    { name: 'Vampire Lord', tags: ['Supernatural', 'Romance'], image: 'https://picsum.photos/seed/7/300/400' },
+    { name: 'Space Marine', tags: ['Sci-Fi', 'War'], image: 'https://picsum.photos/seed/8/300/400' },
+    { name: 'High School Bully', tags: ['Drama', 'Enemies to Lovers'], image: 'https://picsum.photos/seed/9/300/400' },
+    { name: 'Lost Android', tags: ['Sci-Fi', 'Angst'], image: 'https://picsum.photos/seed/10/300/400' },
+    { name: 'Demon King', tags: ['Fantasy', 'Villain'], image: 'https://picsum.photos/seed/11/300/400' },
+    { name: 'Friendly Neighbor', tags: ['Slice of Life', 'Wholesome'], image: 'https://picsum.photos/seed/12/300/400' }
   ]
 }
 
@@ -43,6 +51,9 @@ function App() {
     return localStorage.getItem('anansi-css') || ''
   })
 
+  // Modal State
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false)
+
   // Persist state
   useEffect(() => {
     try {
@@ -56,15 +67,15 @@ function App() {
     }
   }, [theme, content, manualCSS])
 
-  const handleReset = () => {
-    if (confirm('Are you sure? This will reset the editor to default values.')) {
-      localStorage.removeItem('anansi-theme')
-      localStorage.removeItem('anansi-content')
-      localStorage.removeItem('anansi-css')
-      setTheme(DefaultTheme)
-      setContent(defaultContent)
-      setManualCSS('')
-    }
+  const triggerReset = () => setIsResetModalOpen(true)
+
+  const performReset = () => {
+    localStorage.removeItem('anansi-theme')
+    localStorage.removeItem('anansi-content')
+    localStorage.removeItem('anansi-css')
+    setTheme(DefaultTheme)
+    setContent(defaultContent)
+    setManualCSS('')
   }
 
   // Combine generated CSS with manual overrides
@@ -72,26 +83,41 @@ function App() {
 
   return (
     <ToastProvider>
-      <div className="app-container">
-        <ErrorBoundary onReset={() => window.location.reload()}>
-          <EditorPanel
-            theme={theme}
-            setTheme={setTheme}
-            content={content}
-            setContent={setContent}
-            manualCSS={manualCSS}
-            setManualCSS={setManualCSS}
-            onReset={handleReset}
-          />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <PreviewPanel
-            customCSS={combinedCSS}
-            content={content}
-          />
-        </ErrorBoundary>
-        <ToastContainer />
-      </div>
+      <ResizableLayout
+        leftPanel={
+          <ErrorBoundary onReset={() => window.location.reload()}>
+            <EditorPanel
+              theme={theme}
+              setTheme={setTheme}
+              content={content}
+              setContent={setContent}
+              manualCSS={manualCSS}
+              setManualCSS={setManualCSS}
+              onReset={triggerReset}
+            />
+          </ErrorBoundary>
+        }
+        rightPanel={
+          <ErrorBoundary>
+            <PreviewPanel
+              customCSS={combinedCSS}
+              content={content}
+            />
+          </ErrorBoundary>
+        }
+      />
+
+      <ConfirmationModal
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+        onConfirm={performReset}
+        title="Reset Editor?"
+        message="This will wipe all current changes, including your Custom CSS and Content adjustments. This action cannot be undone."
+        confirmText="Yes, Reset"
+        isDangerous={true}
+      />
+
+      <ToastContainer />
     </ToastProvider>
   )
 }
