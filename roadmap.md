@@ -288,18 +288,24 @@ This roadmap outlines the development phases for polishing the Anansi Profile Ed
   - Ctrl/Cmd + R: Reset
   - Show shortcuts in "Help" menu
 
+- [ ] **Live Sync Preview**
+  - [ ] Implement React Portal for pop-out window
+  - [ ] Sync styles and context (Theme/Toast) across windows
+  - [ ] Auto-close window on app unmount
+
 - [ ] **Import/Export Themes**
-  - Export theme as JSON file
-  - Import theme from JSON file
-  - Share themes with others
-  - Validate imported JSON schema
+  - [ ] Export theme as JSON file
+  - [ ] Import theme from JSON file
+  - [ ] Share themes with others
+  - [ ] Validate imported JSON schema
 
 **Success Criteria:**
 - Power users can work faster with shortcuts
 - Easy to experiment with presets
 - Themes can be shared and reused
+- Dual-monitor workflows supported via Portal
 
-**Estimated Time:** 8-10 hours
+**Estimated Time:** 12-15 hours
 
 ---
 
