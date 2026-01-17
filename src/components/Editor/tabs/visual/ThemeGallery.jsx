@@ -8,8 +8,11 @@ const ThemeGallery = ({ currentTheme, onApplyTheme }) => {
     const [selectedId, setSelectedId] = React.useState(null)
 
     const handleApply = (themeDef) => {
-        // Create a fresh copy to avoid reference issues
-        onApplyTheme({ ...themeDef })
+        // Create a fresh copy and ensure modification tracking is reset
+        onApplyTheme({
+            ...themeDef,
+            isThemeModified: false
+        })
         addToast(`Applied ${themeDef.name} theme!`, 'success')
         setSelectedId(null)
     }

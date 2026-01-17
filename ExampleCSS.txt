@@ -1,0 +1,334 @@
+<style>
+
+
+.pp-page-background {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0f1115; 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Inter;
+    color: #cefd07 !important;
+    color-scheme: dark !important;
+}
+
+
+.pp-page-background h1, .pp-page-background h2, .pp-page-background h3, 
+.pp-page-background h4, .pp-page-background h5, .pp-page-background h6,
+.pp-page-background p, .pp-page-background span, .pp-page-background div {
+    color: #cefd07;
+    font-family: Inter;
+}
+
+
+
+.pp-uc-background {
+  border-color: #a3174d !important;
+  box-shadow: 0 0 15px #a3174d40 !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(0px);
+  background-color: rgba(130, 8, 191, 0.95) !important;
+  
+}
+
+
+
+
+@keyframes ppShakeBell {
+    0%, 50%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(25deg); }
+    20%, 40% { transform: rotate(-25deg); }
+}
+[aria-label="Notifications"] svg:has(+ div) {
+    animation: ppShakeBell 1.5s infinite !important;
+}
+
+
+.chakra-badge {
+  background-color: #a3174d !important;
+  color: #fff !important;
+  
+}
+
+
+
+.profile-page-container {
+    
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+.profile-page-flex {
+    flex: 0 0 350px !important;
+    width: auto !important;
+    position: sticky !important;
+    top: 30px !important;
+}
+
+
+.profile-page-container-flex-box {
+    flex: 1 !important;
+    width: 100% !important; 
+    
+}
+
+
+@media (max-width: 600px) {
+    .profile-page-container {
+        flex-direction: column !important;
+    }
+    .profile-page-flex {
+        width: 100% !important;
+        position: static !important;
+        flex: 0 0 auto !important;
+    }
+    .profile-page-container-flex-box {
+        width: 100% !important;
+    }
+}
+
+
+.profile-background-box-1, .profile-background-box-2, .profile-background-box-3 {
+    display: none !important;
+    background: none !important;
+}
+
+.pp-uc-background .css-1fd6h3f {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+.pp-uc-avatar {
+  width: 179px !important;
+  height: 179px !important;
+  text-align: center !important;
+}
+
+img.pp-uc-avatar {
+  border-color: #a3174d !important;
+  border-radius: 0% !important;
+  object-fit: cover !important;
+  object-position: 7% 0% !important;
+  width: 179px !important;
+  height: 179px !important;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%) !important;
+  mask-image: none !important;
+  
+}
+.pp-uc-avatar-container {
+    width: 179px !important;
+    height: 179px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}
+
+.css-1uodvt1 {
+  width: 0px !important;
+  text-align: left !important;
+}
+.pp-uc-about-me {
+  text-align: left !important;
+}
+.stats-row {
+  display: flex !important;
+  justify-content: flex-start !important;
+  gap: 20px !important;
+  margin-top: 20px !important;
+}
+
+
+.pp-uc-followers-count {
+    margin-right: 20px !important;
+}
+
+
+
+
+.pp-cc-avatar {
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+
+
+.pp-cc-avatar {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+.pp-cc-list-container > *:hover .pp-cc-avatar,
+.mock-card:hover .pp-cc-avatar {
+    filter: grayscale(0%);
+}
+
+
+
+@keyframes sheenMove {
+    from { left: -75%; }
+    to { left: 125%; }
+}
+.pp-cc-name {
+    position: relative;
+    overflow: hidden;
+}
+.pp-cc-name::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+}
+.pp-cc-avatar-container:hover ~ * .pp-cc-name::before,
+.pp-cc-name:hover::before {
+    animation: sheenMove 1s forwards;
+}
+
+
+
+.pp-cc-creator {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+}
+
+
+
+
+
+details {
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #a3174d40;
+}
+details summary {
+    font-weight: bold;
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    background: rgba(255, 0, 0, 0.5);
+    list-style: none; 
+}
+details summary::after {
+    content: '+';
+    position: absolute;
+    right: 12px;
+}
+details[open] summary::after {
+    content: '-';
+}
+.details-content {
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+}
+
+
+
+
+</style>
+
+<p>Hi! I'm Annabelle Caprine.I've enjoyed storytelling for a while and trying to see what can be done with bots and logic trees has been really interesting. I'm still pushing the boundaries of what I can manage with the tools they've given us. 
+
+Also, because I've started making theme songs to use in Music Mania. Check them out here.
+<a rel="noopener noreferrer nofollow" href="https://soundcloud.com/mikah-brooke">https://soundcloud.com/mikah-brooke</a><br><br>I have a Discord!<br><a rel="noopener noreferrer nofollow" href="https://discord.gg/kdSE2rZA7n">https://discord.gg/kdSE2rZA7n</a><br><br>This is basically just for <a rel="noopener noreferrer nofollow" href="https://annabellecaprine.github.io/Anansi/">Anansi</a>, but you're welcome to come hang out anyway.
+
+The other new project I have going is working with the CSS folks to build a Visual Editor for managing Profile CSS customization.
+<a rel="noopener noreferrer nofollow" href="https://annabellecaprine.github.io/AnansiProfileEditor/">https://annabellecaprine.github.io/AnansiProfileEditor/ </a>
+<br>I used to say I was hoping to capture my fellow creator's genius, but...<br><br>Now I'm just proud to say that these are some my fellow creators and they produce amazing work I love to enjoy. Not my entire favorites list, but some of the ones I never miss.</p>
+<details>
+<summary>Some of My Favorite Creators</summary>
+<div class="details-content">
+<div class="creator-gallery" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/86ed6291-1972-47be-bde0-a157be8844e1_profile-of-lrrr">@LRRR</a>
+        <img src="https://ella.janitorai.com/media-approved/BNpzD-SO-7M1bmZuw1Ljo.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/930b74d3-a557-4cf8-98fc-4abd3c49d239_profile-of-the-nameless-1">@TheNameless1</a>
+        <img src="https://ella.janitorai.com/media-approved/kdO1DL8-FnkfF_WXwhfiN.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/2ad90dfd-6ae1-4cf5-8508-bcae36f0e616_profile-of-fantom-4-t-5">@Fantom4t5</a>
+        <img src="https://ella.janitorai.com/media-approved/3ERuN3QAz1_FOplcPtwg3.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/097341a5-b599-4480-95f2-89f4e1ecbef9_profile-of-neglected-houseplant">@NeglectedHouseplant</a>
+        <img src="https://ella.janitorai.com/media-approved/UND37CwofdR-NgnYFVd1p.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/36229b7b-d0c9-4531-9b1f-5e91f6089e8c_profile-of-korny-pony">@KornyPony</a>
+        <img src="https://ella.janitorai.com/media-approved/3QX2pFL8TZLjYy72R3_Pk.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/2795e0c3-fc1c-4777-a467-a2986d18e656_profile-of-kit-kat-73">@KitKat73</a>
+        <img src="https://ella.janitorai.com/media-approved/ZyMTaWzWdJ-FK9ERBXTLd.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/47140651-ec43-4de5-be39-69f0ce19567e_profile-of-dx-mpie">@DXMPie</a>
+        <img src="https://ella.janitorai.com/media-approved/fodwu6CDsrz_VcOe8vuax.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/7262e65a-212c-4f6e-bb87-8f341d6f9180_profile-of-alazar-ramir">@AlazarRamir</a>
+        <img src="https://ella.janitorai.com/media-approved/T4QUiLPh_KGx21st8MeBq.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/676452ff-de59-4dd6-8ff6-fd892f2d2ddd_profile-of-noneless">@Noneless</a>
+        <img src="https://ella.janitorai.com/media-approved/4_JjlO0UC9j1jryLNDTSp.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/935b90dc-d835-42d9-ae18-da7d49b0fe33_profile-of-xoxohni">@xoxohni</a>
+        <img src="https://ella.janitorai.com/media-approved/PQqNQP0-rDThdqtQ1n2qE.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/7497833c-17d0-4d7f-aada-b209a741b568_profile-of-thepupich">@thepupich</a>
+        <img src="https://ella.janitorai.com/media-approved/rXMzIkQU_jX-r8lL9jWVc.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/8a5eed3a-15d8-40dc-bcdb-f7c32c040e40_profile-of-lucy-girl-123">@LucyGirl123</a>
+        <img src="https://ella.janitorai.com/media-approved/0WhRrFsjnqaIbL-0Uw8nU.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+    <div class="creator-item" style="display: flex; flex-direction: column; align-items: center; width: 220px;">
+        <a rel="noopener noreferrer nofollow" href="https://janitorai.com/profiles/127ec46a-73ec-43e5-ba9b-c7b0b1fcf2c7_profile-of-kalaydus">@Kalaydus</a>
+        <img src="https://ella.janitorai.com/media-approved/O5ipwNkYZNfs1I39Z3KCV.webp" style="width: 220px; height: 320px; object-fit: cover; border-radius: 8px; margin-top: 8px; cursor: pointer;">
+    </div>
+</div>
+</div>
+</details>
+
+<details>
+<summary>Milestones</summary>
+<div class="details-content">
+09/27/25 - Hit the 25 Follower mark. It's a low mark, but I appreciate the early followers.
+    Trying to find that right balance still that people want to see.<br><br>10/15/25 - Hit 40 followers. Still exploring
+    with a variety of styles and seeing what connects with people. Still focusing on stories I want to tell. Thank you
+    all for joining me on this journey<br><br>10/19/25 - Proud Milestone: My Ghost in the Graveyard (at only 289
+    messages at time of writing), has surpassed in favorites my most popular character (3.2k) I must be doing something
+    right.<br><br>11/17/25 - Hit 50 followers. I had hoped to have something epic prepared for this, but stumbling
+    blocks got in the way. My focus here lately has been helping explore the knowledge of what can be done on the
+    platform with scripts and how it can be used to make characters more nuanced.<br><br>12/11/25 - 69 followers.
+    Nice.<br><br>12/17/25 - 87 followers. I don't deserve some of those, but thank you. I hope you're following because
+    you enjoy my content. Not just because I did a nice thing.<br><br>12/28/25 - 100 followers. I'm thrilled that so
+    many people have enjoyed the stuff I've made. The other thing I am doing is putting together tools to help people
+    make cool stuff. <br><br>
+01/16/26 - 113 follows. I've build Anansi for bot building and now a budding Profile Editor for CSS.<br><br>
+  
+  <p></p>
+</div>
+</details>

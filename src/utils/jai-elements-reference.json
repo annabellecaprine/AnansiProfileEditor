@@ -1,0 +1,451 @@
+{
+    "version": "1.0.0",
+    "source": "https://rentry.org/jaielements",
+    "author": "Puppy",
+    "last_updated": "2026-01-16",
+    "elements": {
+        "bot_card": {
+            "wrapper": [
+                ".css-13wmn96",
+                ".pp-cc-wrapper",
+                ".profile-character-card-wrapper"
+            ],
+            "gradients": {
+                "1": [
+                    ".pp-cc-gradient-1",
+                    ".css-1sxhvxh > .css-0"
+                ],
+                "2": [
+                    ".pp-cc-gradient-2",
+                    ".css-dltla"
+                ],
+                "3": [
+                    ".pp-cc-gradient-3",
+                    ".css-1jf56se"
+                ]
+            },
+            "inner_stack": [
+                ".css-1s5evre",
+                ".profile-character-card-stack"
+            ],
+            "link_component": [
+                ".profile-character-card-stack-link-component",
+                ".css-1s5evre a:nth-child(1)"
+            ],
+            "link_box": [
+                ".css-nlxhw4",
+                ".profile-character-card-stack-link-component-box"
+            ],
+            "name_box": [
+                ".pp-cc-name",
+                ".profile-character-card-name-box",
+                ".css-nlxhw4 > div"
+            ],
+            "stats_box": [
+                ".css-10cv7r2",
+                ".profile-character-card-stats-box"
+            ],
+            "ribbon": {
+                "outer": [
+                    ".pp-cc-ribbon",
+                    ".profile-character-card-ribbon",
+                    "._ribbon_1chl9_1",
+                    ".css-1ket5wn"
+                ],
+                "inner": [
+                    ".pp-cc-ribbon-wrap",
+                    ".profile-character-card-ribbon-wrap",
+                    "._content_1chl9_11",
+                    ".css-wexxj8"
+                ],
+                "stats": {
+                    "chats_hstack": [
+                        ".pp-cc-chats",
+                        ".profile-character-card-chats-hstack",
+                        ".css-euh5x6"
+                    ],
+                    "chats_svg": [
+                        ".pp-cc-chats svg",
+                        ".css-euh5x6 svg"
+                    ],
+                    "chats_count": [
+                        ".pp-cc-chats-count",
+                        ".profile-character-card-chats-count",
+                        ".css-euh5x6 span"
+                    ]
+                }
+            },
+            "avatar": {
+                "aspect_ratio": [
+                    ".css-1q7rmf0",
+                    ".profile-character-card-avatar-aspect-ratio"
+                ],
+                "image": [
+                    ".pp-cc-avatar",
+                    ".profile-character-card-avatar-image",
+                    ".css-1q7rmf0 img"
+                ]
+            },
+            "creator_link": [
+                ".profile-character-card-creator-name-link",
+                ".css-1s5evre a:nth-child(2)"
+            ],
+            "creator_name": [
+                ".pp-cc-creator-name",
+                ".profile-character-card-creator-name-box",
+                ".css-1s5evre a:nth-child(2) span"
+            ],
+            "description": {
+                "box": [
+                    ".css-199gcrh",
+                    ".profile-character-card-description-box"
+                ],
+                "markdown": [
+                    ".pp-cc-description",
+                    ".profile-character-card-description-markdown-container",
+                    ".css-96l1id"
+                ],
+                "paragraphs": [
+                    ".css-96l1id p",
+                    ".css-199gcrh p",
+                    ".pp-cc-description p"
+                ]
+            },
+            "star_line": {
+                "box": [
+                    ".css-1lgnt2x",
+                    ".pp-cc-star-line",
+                    ".profile-character-card-star-line",
+                    ".css-1s5evre > div:nth-child(4)"
+                ],
+                "image": [
+                    ".pp-cc-star",
+                    ".profile-character-card-star",
+                    ".css-1lgnt2x img"
+                ]
+            },
+            "tags": {
+                "box": [
+                    ".css-4ofde4",
+                    ".pp-cc-tags",
+                    ".profile-character-card-tags"
+                ],
+                "list": [
+                    ".css-k1urot"
+                ],
+                "wrap": [
+                    ".css-123m5uu",
+                    ".pp-cc-tags-wrap",
+                    ".profile-character-card-tags-wrap"
+                ],
+                "regular_wrap": [
+                    ".pp-cc-tags-wrap-regular",
+                    ".profile-character-card-tags-wrap-regular"
+                ],
+                "item": [
+                    ".pp-cc-tags-item",
+                    ".pp-cc-tags-regular",
+                    ".css-k1urot span"
+                ],
+                "limitless": [
+                    ".pp-tag-limitless",
+                    ".profile-character-card-tag-limitless",
+                    ".css-123m5uu span"
+                ],
+                "custom": [
+                    ".pp-cc-tags-custom",
+                    ".pp-cc-tags-wrap-custom span"
+                ]
+            },
+            "tokens_box": [
+                ".css-1c9wmts",
+                ".profile-character-card-box"
+            ],
+            "tokens_count": [
+                ".pp-cc-tokens-count",
+                ".profile-character-card-tokens-count",
+                ".css-1c9wmts p"
+            ]
+        },
+        "profile_page": {
+            "main_wrappers": {
+                "body": "body",
+                "root": "root",
+                "app_wrapper": "._wrapper_13xo6_1",
+                "header_outer": [
+                    ".profile-top-bar-flex-outer",
+                    ".pp-top-bar-outer",
+                    "._header_1lgb1_1",
+                    "header"
+                ],
+                "main_outer": [
+                    "main",
+                    "._main_qqqm3_1",
+                    "._customPadding_qqqm3_15"
+                ],
+                "page_container": [
+                    ".css-14l6kwv",
+                    ".profile-page-container"
+                ],
+                "page_background": [
+                    ".pp-page-background",
+                    ".profile-page-background"
+                ],
+                "page_flex": [
+                    ".css-1wfbrwg",
+                    ".profile-page-flex"
+                ],
+                "footer": [
+                    "footer",
+                    "._footer_b4zg4_1"
+                ]
+            },
+            "profile_box": {
+                "wrapper": [
+                    ".pp-uc-background",
+                    ".profile-uc-background-flex",
+                    ".css-vqimyu"
+                ],
+                "background_layers": {
+                    "1": [
+                        ".profile-background-box-1"
+                    ],
+                    "2": [
+                        ".profile-background-box-2"
+                    ],
+                    "3": [
+                        ".profile-background-box-3"
+                    ]
+                },
+                "info_wrapper": [
+                    ".profile-info-wrapper-box"
+                ],
+                "info_stack": [
+                    ".profile-info-stack",
+                    ".css-8g8ihq"
+                ],
+                "info_hstack": [
+                    ".profile-info-hstack",
+                    ".css-1uodvt1"
+                ],
+                "avatar": {
+                    "container": [
+                        ".pp-uc-avatar-container",
+                        ".profile-avatar-container",
+                        ".css-79elbk"
+                    ],
+                    "image": [
+                        ".pp-uc-avatar",
+                        ".profile-avatar",
+                        ".css-18bnokj",
+                        ".css-79elbk img"
+                    ]
+                },
+                "info_inner_stack": [
+                    ".profile-info-stack-inner",
+                    ".css-1uodvt1 > .css-8g8ihq"
+                ],
+                "title": [
+                    ".pp-uc-title",
+                    ".profile-title-heading",
+                    ".profile-info-stack-inner-flex",
+                    ".css-70qvj9 h2",
+                    ".css-o5an2m"
+                ],
+                "followers": {
+                    "box": [
+                        ".pp-uc-followers-count",
+                        ".profile-followers-count",
+                        ".css-1uodvt1 > .css-8g8ihq > div:nth-child(2)"
+                    ],
+                    "count": [
+                        ".pp-uc-followers-count span:nth-of-type(1)"
+                    ],
+                    "label": [
+                        ".pp-uc-followers-count span:nth-of-type(2)"
+                    ]
+                },
+                "badges": {
+                    "box": [
+                        ".css-hjkukh",
+                        ".css-1uodvt1 > .css-8g8ihq > div:nth-child(3)"
+                    ],
+                    "badge": [
+                        ".css-x3wokz"
+                    ],
+                    "image": [
+                        ".css-hjkukh img"
+                    ]
+                },
+                "member_since": [
+                    ".pp-uc-member-since",
+                    ".profile-member-since-box",
+                    ".css-1uodvt1 > .css-8g8ihq > div:nth-child(4)"
+                ],
+                "about_me": [
+                    ".pp-uc-about-me",
+                    ".profile-about-me",
+                    ".css-1bn1yyx"
+                ],
+                "follow_button": {
+                    "box": [
+                        ".profile-uc-follow-flex",
+                        ".css-1vakbk4",
+                        ".css-1aq5geu > div:nth-child(1)"
+                    ],
+                    "button": [
+                        ".pp-uc-follow-button",
+                        ".profile-uc-follow-button",
+                        ".Btn"
+                    ],
+                    "text": [
+                        ".profile-uc-follow-text",
+                        ".Btn span"
+                    ]
+                },
+                "options_menu": {
+                    "button": [
+                        ".pp-uc-options-menu",
+                        ".chakra-menu__menu-button",
+                        ".css-15w88gn"
+                    ],
+                    "icon": [
+                        ".pp-uc-options-menu svg",
+                        ".css-15w88gn svg"
+                    ]
+                }
+            },
+            "tabs": {
+                "wrapper": [
+                    ".profile-tabs-chakra-tabs",
+                    "#profile-tabs",
+                    ".css-1bx5ylf",
+                    ".css-1wfbrwg > div:nth-child(2)"
+                ],
+                "list": [
+                    ".pp-tabs-wrapper",
+                    ".profile-tabs-wrapper",
+                    ".css-i3ef4m"
+                ],
+                "button": [
+                    ".pp-tabs-button",
+                    ".profile-tabs-button",
+                    ".css-1jj3srb"
+                ],
+                "button_selected": [
+                    ".css-1jj3srb[aria-selected=true]",
+                    ".css-1jj3srb[data-selected]"
+                ],
+                "indicator": [
+                    ".pp-tabs-indicator",
+                    ".profile-tabs-indicator",
+                    ".css-1y3jyt3"
+                ],
+                "panels_wrapper": [
+                    ".pp-tabs-panels",
+                    ".profile-tabs-panels",
+                    ".css-1bx5ylf > div:nth-child(2)"
+                ],
+                "panel": [
+                    ".profile-tab-panel",
+                    ".css-1bx5ylf > div:nth-child(2) > div"
+                ]
+            },
+            "character_list": {
+                "container": [
+                    ".characters-list-container-flex",
+                    ".css-2n7zf2 > div"
+                ],
+                "pagination_flex": [
+                    ".character-list-pagination-flex",
+                    ".css-m8ywhg"
+                ],
+                "pagination_box": [
+                    ".character-list-pagination-box",
+                    ".css-m8ywhg > div:nth-child(1)"
+                ],
+                "total_badge": {
+                    "outer": [
+                        ".pp-pg-total",
+                        ".profile-badge-flex-outer",
+                        ".profile-pagination-flex-outer",
+                        ".Btn2-purple"
+                    ],
+                    "inner": [
+                        ".profile-badge-flex-inner"
+                    ],
+                    "count": [
+                        ".pp-pg-total-count",
+                        ".profile-badge-total-count"
+                    ],
+                    "text": [
+                        ".pp-pg-total-text",
+                        ".profile-badge-total-text"
+                    ]
+                },
+                "filters": {
+                    "outer": [
+                        ".profile-filters-flex-outer",
+                        ".css-1cdqd3a"
+                    ],
+                    "inner": [
+                        ".profile-filters-flex-inner",
+                        ".css-sxixz4"
+                    ],
+                    "search_group": [
+                        ".profile-character-search-input-group",
+                        ".profile-filters-flex-inner-hassearchfilter",
+                        ".css-1jy826p"
+                    ],
+                    "search_input": [
+                        ".pp-fl-search-input",
+                        ".profile-character-search-input",
+                        ".css-3rot3",
+                        ".css-1g2mcom"
+                    ],
+                    "filter_button": [
+                        ".pp-fl-filter-button",
+                        ".profile-filter-button",
+                        ".css-1n2in4t"
+                    ],
+                    "order_dropdown": [
+                        ".profile-filters-flex-inner-onorderchanged",
+                        ".css-i3ggec",
+                        ".css-b62m3t-container"
+                    ]
+                }
+            },
+            "pagination": {
+                "outer": [
+                    ".profile-pagination-flex-outer",
+                    ".css-1pfxi6a"
+                ],
+                "prev_hstack": [
+                    ".profile-pagination-prev-hstack",
+                    ".css-1igwmid"
+                ],
+                "prev_button": [
+                    ".pp-pg-prev-button",
+                    ".profile-pagination-prev-button",
+                    ".css-1gpctw1:nth-of-type(1)"
+                ],
+                "pages_inner": [
+                    ".profile-pagination-flex-inner",
+                    ".css-1bejyq4"
+                ],
+                "page_button": [
+                    ".pp-pg-page-button"
+                ],
+                "page_button_active": [
+                    ".pp-pg-page-button-active",
+                    ".profile-pagination-page-button-active"
+                ],
+                "next_button": [
+                    ".pp-pg-next-button",
+                    ".profile-pagination-next-button-icon",
+                    ".css-1gpctw1:nth-of-type(2)"
+                ]
+            }
+        }
+    }
+}

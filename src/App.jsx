@@ -10,6 +10,7 @@ import ResizableLayout from './components/Layout/ResizableLayout'
 import ConfirmationModal from './components/Editor/ui/ConfirmationModal'
 import { downloadProjectAsJson, parseProjectFile } from './utils/projectManagement'
 import useHistory from './hooks/useHistory'
+import { version } from '../package.json'
 import './App.css'
 
 // Default mock content
@@ -56,7 +57,16 @@ function App() {
   const { theme, content, manualCSS } = appState
 
   // Helper Setters to maintain prop compatibility
-  const setTheme = (val) => setAppState(prev => ({ ...prev, theme: typeof val === 'function' ? val(prev.theme) : val }))
+  const setTheme = (val) => setAppState(prev => {
+    const nextTheme = typeof val === 'function' ? val(prev.theme) : val
+    return {
+      ...prev,
+      theme: {
+        ...nextTheme,
+        isThemeModified: true // Mark as modified when changed via editor
+      }
+    }
+  })
   const setContent = (val) => setAppState(prev => ({ ...prev, content: typeof val === 'function' ? val(prev.content) : val }))
   const setManualCSS = (val) => setAppState(prev => ({ ...prev, manualCSS: typeof val === 'function' ? val(prev.manualCSS) : val }))
 
@@ -73,6 +83,11 @@ function App() {
       console.error("Failed to save to localStorage:", e)
     }
   }, [appState])
+
+  // Set document title with version
+  useEffect(() => {
+    document.title = `Profile CSS Editor v${version}`
+  }, [])
 
   const triggerReset = () => setIsResetModalOpen(true)
 

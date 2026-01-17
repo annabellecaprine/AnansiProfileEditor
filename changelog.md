@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2026-01-16
+### Major Feature Release: Card Templates & Attribution System
+This release introduces a robust structural template system for character cards and automatic author attribution for community designs.
+
+### Added
+- **Character Card Templates**: 
+  - **Music Show (Concert Poster)**: A complete reskin using CSS Grid by MantaRae.
+  - **Tigerdropped Flip (BETA)**: Interactive flip-card effect now integrated as a template.
+  - **Standard**: The clean, default JanitorAI layout.
+- **Hybrid Editing Engine**: Templates now serve as a base; manual tweaks are tracked and preserved.
+- **Dynamic Attribution Engine**: 
+  - Automatic credit injection for both **Profile Themes** (Global) and **Card Templates**.
+  - Smart labels: "Card Theme by [Author]" automatically updates to "Based on Card Theme by [Author]" if you modify the design.
+  - Attribution is elegantly stacked: `Theme: [Name] by [Author] | Card Theme: [Name] by [Author]`.
+- **Advanced Mock Elements**: 
+  - Improved JanitorAI Header alignment.
+  - Centered Search Bar in full-screen/desktop mode.
+  - Refined attribution positioning to prevent clipping.
+
+### Fixed
+- **Visual Tracking**: Added application version number to the browser tab header (document title) for easier update verification.
+
 ## [1.4.0] - 2026-01-14
 ### Major Feature Release: Advanced Editor Tools
 This release transforms the editor into a powerful professional tool with project state management, history controls, and rapid prototyping features.

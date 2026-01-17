@@ -59,60 +59,64 @@ const EntitiesAppearance = ({ theme, updateEntities }) => {
                 <label htmlFor="chk-cardFade" style={{ margin: 0, fontWeight: 400 }}>Fade Image Bottom</label>
             </div>
 
-            <hr className="divider" />
+            {(theme.entities?.templateId !== 'music-show') && (
+                <>
+                    <hr className="divider" />
 
-            <div className="control-section" style={{ padding: 0, border: 'none' }}>
-                <label style={{ marginBottom: 8 }}>
-                    {theme.entities?.layoutMode === 'flex' ? <WrapText size={14} /> : <Columns size={14} />}
-                    Grid Configuration
-                </label>
-                <div className="button-group" style={{ marginBottom: 16 }}>
-                    <button
-                        className={theme.entities?.layoutMode !== 'flex' ? 'active' : ''}
-                        onClick={() => updateEntities('layoutMode', 'grid')}
-                    >Grid (Strict)</button>
-                    <button
-                        className={theme.entities?.layoutMode === 'flex' ? 'active' : ''}
-                        onClick={() => updateEntities('layoutMode', 'flex')}
-                    >Flex (Responsive)</button>
-                </div>
+                    <div className="control-section" style={{ padding: 0, border: 'none' }}>
+                        <label style={{ marginBottom: 8 }}>
+                            {theme.entities?.layoutMode === 'flex' ? <WrapText size={14} /> : <Columns size={14} />}
+                            Grid Configuration
+                        </label>
+                        <div className="button-group" style={{ marginBottom: 16 }}>
+                            <button
+                                className={theme.entities?.layoutMode !== 'flex' ? 'active' : ''}
+                                onClick={() => updateEntities('layoutMode', 'grid')}
+                            >Grid (Strict)</button>
+                            <button
+                                className={theme.entities?.layoutMode === 'flex' ? 'active' : ''}
+                                onClick={() => updateEntities('layoutMode', 'flex')}
+                            >Flex (Responsive)</button>
+                        </div>
 
-                {theme.entities?.layoutMode === 'flex' ? (
-                    <>
-                        <Slider
-                            label="Card Width"
-                            value={theme.entities?.cardWidth || 300}
-                            min={100}
-                            max={500}
-                            step={10}
-                            onChange={(val) => updateEntities('cardWidth', val)}
-                            unit="px"
-                        />
-                        <div className="control-row">
-                            <span>Gap (px)</span>
-                            <input
-                                type="number" className="mini-input" style={{ width: 60 }}
-                                value={theme.entities?.gap !== undefined ? theme.entities.gap : 16}
-                                onChange={(e) => updateEntities('gap', parseInt(e.target.value))}
-                            />
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <Slider
-                            label="Columns"
-                            value={theme.entities?.gridColumns || 3}
-                            min={1}
-                            max={6}
-                            step={1}
-                            onChange={(val) => updateEntities('gridColumns', val)}
-                        />
-                        <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#888' }}>
-                            Controls how many cards appear per row.
-                        </div>
-                    </>
-                )}
-            </div>
+                        {theme.entities?.layoutMode === 'flex' ? (
+                            <>
+                                <Slider
+                                    label="Card Width"
+                                    value={theme.entities?.cardWidth || 300}
+                                    min={100}
+                                    max={500}
+                                    step={10}
+                                    onChange={(val) => updateEntities('cardWidth', val)}
+                                    unit="px"
+                                />
+                                <div className="control-row">
+                                    <span>Gap (px)</span>
+                                    <input
+                                        type="number" className="mini-input" style={{ width: 60 }}
+                                        value={theme.entities?.gap !== undefined ? theme.entities.gap : 16}
+                                        onChange={(e) => updateEntities('gap', parseInt(e.target.value))}
+                                    />
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <Slider
+                                    label="Columns"
+                                    value={theme.entities?.gridColumns || 3}
+                                    min={1}
+                                    max={6}
+                                    step={1}
+                                    onChange={(val) => updateEntities('gridColumns', val)}
+                                />
+                                <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#888' }}>
+                                    Controls how many cards appear per row.
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </>
+            )}
         </ControlSection>
     )
 }

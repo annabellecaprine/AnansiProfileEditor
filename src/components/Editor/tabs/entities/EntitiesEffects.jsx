@@ -29,12 +29,13 @@ const EntitiesEffects = ({ theme, updateEntities }) => {
                 <label htmlFor="chk-sheen" style={{ margin: 0, fontWeight: 400 }}>Sheen Name Animation</label>
             </div>
 
-            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: 10, opacity: (theme.entities?.templateId && theme.entities?.templateId !== 'standard' && theme.entities?.templateId !== 'flip') ? 0.5 : 1, pointerEvents: (theme.entities?.templateId && theme.entities?.templateId !== 'standard' && theme.entities?.templateId !== 'flip') ? 'none' : 'auto' }}>
                 <input
                     type="checkbox"
                     id="chk-flipCard"
-                    checked={theme.entities?.flipCard || false}
+                    checked={theme.entities?.flipCard || theme.entities?.templateId === 'flip' || false}
                     onChange={(e) => updateEntities('flipCard', e.target.checked)}
+                    disabled={theme.entities?.templateId && theme.entities?.templateId !== 'standard' && theme.entities?.templateId !== 'flip'}
                 />
                 <label htmlFor="chk-flipCard" style={{ margin: 0, fontWeight: 400 }}>
                     Flip Card Effect <span style={{ fontSize: '0.7em', color: '#e53e3e' }}>(BETA)</span>

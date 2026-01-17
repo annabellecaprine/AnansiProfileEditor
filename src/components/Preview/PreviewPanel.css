@@ -1,12 +1,284 @@
-.preview-container {
+/* Global Structure */
+#root,
+._wrapper_13xo6_1 {
+    width: 100%;
+    min-height: 100%;
+    background-color: #313338;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header / Top Bar */
+.profile-top-bar-flex-outer {
+    background-color: #1a1b1e;
+    border-bottom: 1px solid #2d2f34;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.profile-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.pp-top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.pp-top-bar-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+    /* Occupies more space to allow true centering */
+}
+
+.pp-top-bar-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.profile-top-bar-logo-box .glow-logo h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.profile-top-bar-search-box {
+    background: #2b2d31;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.pp-top-bar-create-char {
+    background: linear-gradient(135deg, #6b46c1 0%, #44337a 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Main Content Area */
+._main_qqqm3_1 {
+    padding-top: 1rem;
+    min-height: calc(100vh - 60px);
+}
+
+.profile-page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.profile-page-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: #0f1115;
+}
+
+.profile-page-flex {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+}
+
+/* Profile Box & Background Boxes */
+.pp-uc-background {
+    flex: 0 0 380px;
+    background-color: #111214;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    border: 1px solid #2d2f34;
+}
+
+/* Decorative layers that users often target */
+.profile-background-box-1,
+.profile-background-box-2,
+.profile-background-box-3 {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.profile-info-wrapper-box {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-avatar-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #1e1f22;
+}
+
+.profile-avatar {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    object-fit: cover;
+}
+
+.profile-title-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profile-followers-count {
+    color: #b5bac1;
+    font-size: 0.9rem;
+}
+
+.profile-uc-follow-button {
+    background-color: #5865f2;
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Tabs & Transitions */
+.profile-tabs-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    border-bottom: 2px solid #2d2f34;
+    margin-bottom: 1.5rem;
+}
+
+.profile-tabs-button {
+    background: none;
+    border: none;
+    color: #b5bac1;
+    padding: 0.8rem 0;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
     position: relative;
-    background: #000;
-    /* Fallback */
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s ease;
+}
+
+.profile-tabs-button[data-selected] {
+    color: #fff;
+}
+
+/* Character List & Cards */
+.Btn2-purple {
+    background: #2b2d31;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #3f4147;
+}
+
+.profile-badge-total-count {
+    color: #a385f9;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.profile-badge-total-text {
+    color: #b5bac1;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.profile-character-card-wrapper {
+    background-color: #2b2d31;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    border: 1px solid #3f4147;
+}
+
+.profile-character-card-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.profile-character-card-avatar-aspect-ratio {
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.profile-character-card-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-character-card-name-box {
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-character-card-ribbon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.profile-character-card-tags {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pp-tag-limitless {
+    background: #f6ad55;
+    color: #000;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.pp-cc-tags-regular {
+    color: #8a8d94;
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .profile-page-flex {
+        flex-direction: column;
+    }
+
+    .pp-uc-background {
+        width: 100%;
+        flex: none;
+    }
 }
 
 /* "Live Preview" Badge */
@@ -22,217 +294,9 @@
     font-weight: 600;
     padding: 4px 10px;
     border-radius: 20px;
-    z-index: 100;
+    z-index: 2000;
     display: flex;
     align-items: center;
     gap: 6px;
     pointer-events: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.preview-badge::before {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    background: #48BB78;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #48BB78;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.7;
-    }
-
-    50% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(0.95);
-        opacity: 0.7;
-    }
-}
-
-/* Full Page Background Wrapper */
-.pp-page-background {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    /* The page scrolls inside here */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    /* Default dark if no image */
-    background-color: #0f1115;
-    transition: background 0.3s ease;
-}
-
-/* Main Flex Layout */
-.profile-page-container-flex-box {
-    display: flex;
-    flex-direction: row;
-    /* Side by side on desktop */
-    /* Side by side on desktop */
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 30px 20px;
-    gap: 30px;
-    align-items: flex-start;
-    /* Align top */
-}
-
-/* Left Column: Profile Card */
-.profile-uc-follow-flex {
-    flex: 0 0 350px;
-    /* Fixed width for profile card usually */
-    position: sticky;
-    top: 30px;
-}
-
-/* Right Column: Character Grid */
-.profile-character-search-input-group {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.2);
-    /* Slight mock bg only for visibility of container if needed */
-    padding: 20px;
-    border-radius: 12px;
-}
-
-/* MOCK UI ELEMENTS (To look like J.AI) */
-.mock-search-bar {
-    width: 100%;
-    padding: 12px 16px;
-    background: #1A202C;
-    border-radius: 8px;
-    color: #718096;
-    margin-bottom: 24px;
-    border: 1px solid #2D3748;
-}
-
-.section-title {
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    border-bottom: 1px solid #2D3748;
-    padding-bottom: 8px;
-}
-
-.character-grid {
-    display: grid;
-    /* Columns handled by dynamic CSS */
-    gap: 16px;
-}
-
-
-
-/* PROFILE CARD STYLES (Existing + Tweaks) */
-.pp-uc-background {
-    background-color: #1A202C;
-    border: 1px solid #2D3748;
-    padding: 24px;
-    color: #fff;
-    /* Default layout if not overridden */
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-
-/* Responsive */
-@media (max-width: 900px) {
-    .profile-page-container-flex-box {
-        flex-direction: column;
-    }
-
-    .profile-uc-follow-flex {
-        width: 100%;
-        position: static;
-    }
-}
-
-/* PREMIUM MOCK CARD STYLES */
-.mock-card {
-    background: #1A202C;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: default;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid #2d3748;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.mock-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
-}
-
-.char-img {
-    width: 100%;
-    /* Enforce 1:1 Aspect Ratio properly */
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-    height: auto;
-}
-
-.char-info {
-    padding: 16px;
-    /* Gradient background for premium look */
-    background: linear-gradient(to top, #1A202C 80%, rgba(26, 32, 44, 0.6));
-    z-index: 2;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    /* Pull up effect */
-    margin-top: -40px;
-    position: relative;
-    pointer-events: none;
-}
-
-.char-info>* {
-    pointer-events: auto;
-}
-
-.char-info h4 {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.char-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: auto;
-}
-
-.char-tag {
-    font-size: 0.7rem;
-    background: #2D3748;
-    color: #A0AEC0;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 500;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Helper for Bio Handling */
-.bio-html {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    /* Ensure long words don't overflow */
 }

@@ -166,88 +166,198 @@ export default function PreviewPanel({ customCSS, content }) {
                             <span>Live Preview</span>
                         </div>
 
-                        {/* FULL PAGE WRAPPER (The Background lives here now) */}
-                        <div className="pp-page-background profile-page-background css-flhja6">
-
-                            {/* Main Flex Container (Two Columns) */}
-                            <div className="profile-page-container-flex-box css-1747r9t">
-
-                                {/* COLUMN 1: Profile Card */}
-                                <div className="profile-uc-follow-flex css-1vakbk4">
-                                    <div className="chakra-stack css-1aq5geu">
-
-                                        {/* The ACTUAL Card */}
-                                        <div className="pp-uc-background profile-uc-background-flex css-1xdsfqv">
-
-                                            <div className="css-10klw3m">
-                                                <div className="css-1fd6h3f">
-                                                    {/* Avatar */}
-                                                    <div className="pp-uc-avatar-container profile-avatar-container css-1vppv5c">
-                                                        <img src={content.avatarUrl} alt="Avatar" className="pp-uc-avatar profile-avatar" onError={(e) => e.target.src = 'https://janitorai.com/assets/img/defaults/avatar-2.png'} />
-                                                    </div>
-
-                                                    <div className="css-1uodvt1">
-                                                        <div className="pp-uc-title profile-title-heading css-17xejub">
-                                                            <h2 className="chakra-heading css-1dklj6k">{content.displayName}</h2>
-                                                            {content.badgeText && <div className="chakra-badge css-12j7576">{content.badgeText}</div>}
-                                                        </div>
-                                                        {content.handle && <div className="css-0 text-muted">@{content.handle.replace(/^@/, '')}</div>}
-                                                        {content.memberSince && <div className="css-0 text-muted" style={{ fontSize: '0.8rem', marginTop: 4 }}>Member since {content.memberSince}</div>}
-                                                    </div>
+                        {/* FULL PAGE WRAPPER */}
+                        <div id="root">
+                            <div className="_wrapper_13xo6_1" style={{ background: '#313338', minHeight: '100%' }}>
+                                <header className="_header_1lgb1_1 profile-top-bar-flex-outer pp-top-bar-outer" style={{ paddingTop: 0 }}>
+                                    <div className="_bar_1lgb1_26 pp-top-bar profile-top-bar pp-top-bar-inner">
+                                        <div className="_left_1lgb1_45 profile-top-box-flex-inner pp-top-bar-left">
+                                            <div className="_logoContainer_1lgb1_7 profile-top-bar-logo-box">
+                                                <div className="pp-top-bar-logo profile-top-bar-logo glow-logo">
+                                                    <h2 className="chakra-heading pp-top-bar-logo-name profile-top-bar-logo-name">janitor</h2>
+                                                    <p className="chakra-text pp-top-bar-logo-sub-name profile-top-bar-logo-sub-name">beta</p>
                                                 </div>
                                             </div>
-
-                                            <div className="pp-uc-about-me profile-about-me css-15h6z3q content-body">
-                                                <h3 className="css-1qf1b0y">About Me</h3>
-                                                <div className="css-1y59tt6 bio-html" dangerouslySetInnerHTML={{ __html: content.bio }} />
-
-                                                <div className="css-70qvj9 stats-row">
-                                                    <div className="stat-box pp-uc-followers-count profile-followers-count">
-                                                        <span>Followers</span>
-                                                        <strong>{content.followers}</strong>
-                                                    </div>
-                                                    <div className="stat-box pp-uc-following-count profile-following-count">
-                                                        <span>Chat Count</span>
-                                                        <strong>{content.chatCount}</strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
-                                        {/* End Actual Card */}
-                                    </div>
-                                </div>
 
-                                {/* COLUMN 2: Character Grid (Mock Content) */}
-                                <div className="profile-character-search-input-group css-1y0e7gb">
-                                    <div className="mock-search-bar">
-                                        <span>Search characters...</span>
-                                    </div>
-
-                                    <h2 className="section-title">Public Characters ({content.characters?.length || 0})</h2>
-
-                                    <div className="pp-cc-list-container css-16g5xvc character-grid">
-                                        {(content.characters || []).map((char, i) => (
-                                            <div key={i} className="css-1s5evre mock-card">
-                                                <div className="profile-character-card-avatar-aspect-ratio css-1q7rmf0">
-                                                    <img src={char.image} alt={char.name} className="pp-cc-avatar profile-character-card-avatar-image char-img" />
-                                                </div>
-                                                <div className="char-info">
-                                                    <div className="css-zgqw37 pp-cc-name profile-character-card-name">
-                                                        <h4>{char.name}</h4>
-                                                    </div>
-                                                    <div className="css-1m0lwfp pp-cc-creator text-muted" style={{ fontSize: '0.75rem', marginBottom: 4 }}>
-                                                        By @user
-                                                    </div>
-                                                    <div className="char-tags">
-                                                        {char.tags.map(tag => <span key={tag} className="char-tag">{tag}</span>)}
+                                        <div className="pp-top-bar-center">
+                                            <div className="_searchInputContainer_1lgb1_19 profile-top-bar-search-wrapper">
+                                                <div className="_container_fgb7n_1 profile-top-bar-search-box pp-top-bar-search-box">
+                                                    <div className="_form_1d69i_129 pp-top-bar-search-form">
+                                                        <div className="_inputGroup_1d69i_1 profile-top-bar-search-input-group pp-top-bar-search-input-group">
+                                                            <div className="_inputContainer_1d69i_26 pp-top-bar-search profile-top-bar-search search-input pp-top-bar-search-input">
+                                                                <input id="search-input" placeholder="Search characters..." disabled style={{ background: 'transparent', border: 'none', width: '100%' }} />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        ))}
-                                    </div>
-                                </div>
+                                        </div>
 
+                                        <div className="pp-top-bar-right _right_1lgb1_53">
+                                            <div className="_container_1bfxv_1">
+                                                <div className="_createButton_1bfxv_14 pp-top-bar-create-char profile-top-bar-create-char glow-on-hover">Create a Character</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+
+                                <main className="_main_ckjfh_1 _customPadding_ckjfh_16 _main_qqqm3_1" style={{ '--padding-base': '1rem' }}>
+                                    <div className="chakra-stack profile-page-container css-14l6kwv">
+                                        <div className="pp-page-background profile-page-background css-7d9brm"></div>
+                                        <div className="profile-page-flex css-1wfbrwg">
+
+                                            {/* COLUMN 1: Profile Box */}
+                                            <div className="pp-uc-background profile-uc-background-flex css-1xdsfqv css-vqimyu">
+                                                {/* Background Decorative Layers */}
+                                                <div className="profile-background-box-1 css-0"></div>
+                                                <div className="profile-background-box-2 css-1a4u722"></div>
+                                                <div className="profile-background-box-3 css-1wpvjoq"></div>
+
+                                                <div className="profile-info-wrapper-box css-15vqpxh">
+                                                    <div className="chakra-stack profile-info-stack css-8g8ihq">
+                                                        <div className="chakra-stack profile-info-hstack css-1uodvt1">
+                                                            {/* Avatar */}
+                                                            <div className="pp-uc-avatar-container profile-avatar-container css-79elbk">
+                                                                <img alt="Avatar" src={content.avatarUrl} className="pp-uc-avatar profile-avatar css-18bnokj" onError={(e) => e.target.src = 'https://janitorai.com/assets/img/defaults/avatar-2.png'} />
+                                                            </div>
+
+                                                            <div className="chakra-stack profile-info-stack-inner css-8g8ihq">
+                                                                <div className="profile-info-stack-inner-flex css-70qvj9">
+                                                                    <h2 className="chakra-heading pp-uc-title profile-title-heading css-o5an2m">
+                                                                        {content.displayName}
+                                                                        {content.badgeText && <span className="chakra-badge css-12j7576" style={{ marginLeft: '8px' }}>{content.badgeText}</span>}
+                                                                    </h2>
+                                                                </div>
+                                                                {content.handle && <div className="pp-uc-followers-count profile-followers-count css-1ciz3n">@{content.handle.replace(/^@/, '')}</div>}
+                                                                <div className="pp-uc-followers-count profile-followers-count css-1ciz3n">
+                                                                    <span>{content.followers} </span><span>followers</span>
+                                                                </div>
+                                                                <div className="pp-uc-member-since profile-member-since-box css-wjj1lc">Member Since {content.memberSince}</div>
+
+                                                                <div className="profile-uc-follow-flex css-1vakbk4">
+                                                                    <div className="pp-uc-follow-button profile-uc-follow-button Btn">
+                                                                        <span>Follow</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* About Me Section */}
+                                                        <div className="pp-uc-about-me profile-about-me css-p5wazl content-body">
+                                                            <div className="bio-html" dangerouslySetInnerHTML={{ __html: content.bio }} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* COLUMN 2: Character Grid (Tabs and Panels) */}
+                                            <div className="profile-page-container-flex-box css-1747r9t" style={{ padding: 0, width: '100%', maxWidth: 'none', margin: 0 }}>
+                                                <div className="chakra-tabs profile-tabs-chakra-tabs css-1bx5ylf" id="profile-tabs">
+                                                    <div className="chakra-tabs__tablist pp-tabs-wrapper profile-tabs-wrapper css-i3ef4m" role="tablist">
+                                                        <button className="chakra-tabs__tab pp-tabs-button profile-tabs-button css-1jj3srb" type="button" aria-selected="true" data-selected>
+                                                            Characters
+                                                        </button>
+                                                        <div className="chakra-tabs__tab-indicator pp-tabs-indicator profile-tabs-indicator css-1y3jyt3" style={{ position: 'absolute', left: 0, width: '100px', height: '2px', bottom: 0, background: '#3182ce' }}></div>
+                                                    </div>
+
+                                                    <div className="chakra-tabs__tab-panels pp-tabs-panels profile-tabs-panels css-1eee8fp">
+                                                        <div className="chakra-tabs__tab-panel profile-tab-panel css-1cfoi85">
+                                                            <div className="css-2n7zf2">
+                                                                <div className="characters-list-container-flex css-1qft3au" style={{ display: 'flex', flexDirection: 'column' }}>
+
+                                                                    {/* Filters/Stats */}
+                                                                    <div className="character-list-pagination-flex css-m8ywhg">
+                                                                        <div className="character-list-pagination-box css-dh2zqo">
+                                                                            <div className="_outer_5a6y6_48 profile-pagination-flex-outer pp-pg-total profile-badge-flex-outer Btn2-purple">
+                                                                                <div className="profile-badge-flex-inner css-wd8hou">
+                                                                                    <strong className="pp-pg-total-count profile-badge-total-count">{content.characters?.length || 0}</strong>
+                                                                                    <p className="chakra-text pp-pg-total-text profile-badge-total-text">characters</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="profile-filters-flex-outer css-1cdqd3a">
+                                                                            <div className="profile-filters-flex-inner css-sxixz4">
+                                                                                <div className="profile-character-search-input-group pp-fl-search-input profile-character-search-input">
+                                                                                    <input className="chakra-input" placeholder="Search for characters..." disabled style={{ background: 'transparent', border: 'none' }} />
+                                                                                </div>
+                                                                                <div className="profile-filter-button pp-fl-filter-button">Filter</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {/* Grid */}
+                                                                    <div className="pp-cc-list-container css-16g5xvc" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                                                                        {(content.characters || []).map((char, i) => (
+                                                                            <div key={i} className="pp-cc-wrapper profile-character-card-wrapper css-13wmn96" style={{ position: 'relative' }}>
+                                                                                {/* Card Gradients */}
+                                                                                <div className="pp-cc-gradient-1 css-0" style={{ position: 'absolute', inset: -1, borderRadius: '8px', zIndex: 0 }}></div>
+                                                                                <div className="pp-cc-gradient-2 css-dltla"></div>
+                                                                                <div className="pp-cc-gradient-3 css-1jf56se"></div>
+
+                                                                                <div className="chakra-stack profile-character-card-stack css-1s5evre" style={{ position: 'relative', zIndex: 1 }}>
+                                                                                    <div className="profile-character-card-stack-link-component">
+                                                                                        <div className="profile-character-card-avatar-aspect-ratio css-1q7rmf0">
+                                                                                            <img src={char.image} alt={char.name} className="pp-cc-avatar profile-character-card-avatar-image" />
+                                                                                        </div>
+                                                                                        <div className="profile-character-card-stack-link-component-box css-nlxhw4">
+                                                                                            <div className="pp-cc-name profile-character-card-name-box">
+                                                                                                <h4 style={{ margin: 0 }}>{char.name}</h4>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div className="profile-character-card-stats-box css-10cv7r2">
+                                                                                            <div className="pp-cc-ribbon profile-character-card-ribbon css-1ket5wn">
+                                                                                                <div className="pp-cc-ribbon-wrap profile-character-card-ribbon-wrap css-wexxj8">
+                                                                                                    <div className="pp-cc-chats profile-character-card-chats-hstack css-euh5x6">
+                                                                                                        <span className="pp-cc-chats-count profile-character-card-chats-count">1.2k</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="profile-character-card-description-box css-199gcrh">
+                                                                                        <div className="pp-cc-description profile-character-card-description-markdown-container">
+                                                                                            <p>Bot description goes here...</p>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="pp-cc-star-line profile-character-card-star-line css-1lgnt2x">
+                                                                                        <img src="https://janitorai.com/assets/img/defaults/star-card.svg" className="pp-cc-star profile-character-card-star" alt="star" />
+                                                                                    </div>
+
+                                                                                    <div className="pp-cc-tags profile-character-card-tags css-4ofde4">
+                                                                                        <div className="pp-cc-tags-wrap profile-character-card-tags-wrap">
+                                                                                            <span className="pp-cc-tags-item pp-tag-limitless">Limitless</span>
+                                                                                        </div>
+                                                                                        {char.tags.map(tag => (
+                                                                                            <div key={tag} className="pp-cc-tags-wrap pp-cc-tags-wrap-regular">
+                                                                                                <span className="pp-cc-tags-item pp-cc-tags-regular">#{tag}</span>
+                                                                                            </div>
+                                                                                        ))}
+                                                                                    </div>
+
+                                                                                    <div className="profile-character-card-box css-1c9wmts">
+                                                                                        <p className="pp-cc-tokens-count profile-character-card-tokens-count">800 tokens</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+
+                                <footer className="_footer_b4zg4_1" style={{ padding: '2rem', textAlign: 'center', opacity: 0.5 }}>
+                                    <p>© 2026 JanitorAI - Preview Mock</p>
+                                </footer>
                             </div>
                         </div>
                     </div >
