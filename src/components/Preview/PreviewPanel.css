@@ -80,17 +80,9 @@
 }
 
 .profile-page-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    width: 100%;
+    padding: 0 2rem;
     position: relative;
-}
-
-.profile-page-background {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: #0f1115;
 }
 
 .profile-page-flex {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Smartphone, Tablet, Monitor, ExternalLink } from 'lucide-react'
+import { Smartphone, Tablet, Monitor, ExternalLink, Bell, User } from 'lucide-react'
 import './PreviewPanel.css'
 
 export default function PreviewPanel({ customCSS, content }) {
@@ -32,8 +32,8 @@ export default function PreviewPanel({ customCSS, content }) {
 
         // Gather clean CSS without app-specific scoping if possible, 
         // but here we just take the customCSS + base styles.
-        // We'll also scrape the inner HTML of the preview content.
-        const previewContent = document.querySelector('.pp-page-background')?.outerHTML || '<h1>Error loading preview</h1>'
+        // Scrape the entire preview content including header and main content
+        const previewContent = document.querySelector('.preview-container')?.innerHTML || '<h1>Error loading preview</h1>'
 
         const html = `
             <!DOCTYPE html>
@@ -50,16 +50,34 @@ export default function PreviewPanel({ customCSS, content }) {
                     /* Reset some basic styles to match J.AI defaults roughly */
                     * { box-sizing: border-box; }
                     
-                    /* Include Custom CSS */
-                    ${customCSS}
+                    /* Note: customCSS is already included in the scraped content's style tag */
 
                     /* Ensure full height */
                     html, body { height: 100%; }
                     
                     /* Helper classes from PreviewPanel.css that might be missing in customCSS */
-                    .pp-page-background { width: 100%; min-height: 100vh; background-color: #0f1115; }
-                    .profile-page-container-flex-box { display: flex; max-width: 1400px; margin: 0 auto; padding: 30px 20px; gap: 30px; align-items: flex-start; }
-                    .profile-uc-follow-flex { flex: 0 0 350px; position: sticky; top: 30px; }
+                    
+                    /* Background - must be absolute positioned behind content */
+                    .pp-page-background { position: absolute !important; inset: 0 !important; z-index: -1 !important; width: 100%; min-height: 100vh; background-color: #0f1115; }
+                    
+                    /* Layout - left aligned, no centering */
+                    .profile-page-container { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 2rem !important; position: relative !important; }
+                    .profile-page-flex { display: flex !important; gap: 2rem !important; align-items: flex-start !important; padding: 2rem 0 !important; }
+                    .profile-page-container-flex-box { display: flex !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 30px 2rem !important; gap: 30px !important; align-items: flex-start !important; }
+                    .profile-uc-follow-flex { flex: 0 0 350px !important; position: sticky; top: 30px; }
+                    
+                    /* Header flex layout */
+                    .pp-top-bar-outer { background: #1e1f22; position: sticky; top: 0; z-index: 1000; }
+                    .profile-top-bar, .pp-top-bar { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0.5rem 2rem !important; width: 100% !important; }
+                    .pp-top-bar-left { display: flex !important; align-items: center !important; gap: 1.5rem !important; flex: 1 !important; }
+                    .pp-top-bar-center { display: flex !important; justify-content: center !important; align-items: center !important; flex: 2 !important; }
+                    .pp-top-bar-right { display: flex !important; justify-content: flex-end !important; align-items: center !important; flex: 1 !important; }
+                    .profile-top-bar-logo-box .glow-logo { display: flex; align-items: baseline; gap: 4px; }
+                    .profile-top-bar-logo-box .glow-logo h2 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; margin: 0; }
+                    .profile-top-bar-logo-box .glow-logo p { color: #6b46c1; font-size: 0.7rem; margin: 0; }
+                    .pp-top-bar-create-char { background: linear-gradient(135deg, #6b46c1 0%, #44337a 100%); padding: 0.5rem 1rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; cursor: pointer; color: #fff; }
+                    
+                    /* Card styles */
                     .profile-character-search-input-group { flex: 1; border-radius: 12px; }
                     .mock-card { border-radius: 8px; overflow: hidden; position: relative; display: flex; flex-direction: column; background: #1A202C; }
                     .char-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
@@ -195,8 +213,14 @@ export default function PreviewPanel({ customCSS, content }) {
                                         </div>
 
                                         <div className="pp-top-bar-right _right_1lgb1_53">
-                                            <div className="_container_1bfxv_1">
+                                            <div className="_container_1bfxv_1" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                                 <div className="_createButton_1bfxv_14 pp-top-bar-create-char profile-top-bar-create-char glow-on-hover">Create a Character</div>
+                                                <div className="pp-header-icons" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', color: '#b5bac1' }}>
+                                                    <Bell size={20} style={{ cursor: 'pointer' }} />
+                                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#313338', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '1px solid #3f4147' }}>
+                                                        <User size={18} />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +228,7 @@ export default function PreviewPanel({ customCSS, content }) {
 
                                 <main className="_main_ckjfh_1 _customPadding_ckjfh_16 _main_qqqm3_1" style={{ '--padding-base': '1rem' }}>
                                     <div className="chakra-stack profile-page-container css-14l6kwv">
-                                        <div className="pp-page-background profile-page-background css-7d9brm"></div>
+                                        <div className="pp-page-background css-7d9brm"></div>
                                         <div className="profile-page-flex css-1wfbrwg">
 
                                             {/* COLUMN 1: Profile Box */}

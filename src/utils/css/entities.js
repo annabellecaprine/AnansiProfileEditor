@@ -21,13 +21,6 @@ export const genEntitiesCss = (theme) => {
   border-radius: ${entities.borderRadius !== undefined ? entities.borderRadius : 2}px !important;
   transition: all 0.2s ease !important;
 }
-
-/* Force Card Height */
-.pp-cc-list-container > * {
-    height: ${entities.cardHeight || 400}px !important;
-    min-height: ${entities.cardHeight || 400}px !important;
-    overflow: hidden;
-}
 `);
   }
 

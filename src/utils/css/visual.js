@@ -23,6 +23,9 @@ export const genVisualCss = (theme) => {
     cssParts.push(`
 /* Base Profile Page Defaults */
 .pp-page-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     width: 100%;
     min-height: 100vh;
     background-color: #0f1115; /* Default Dark */
