@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-01-17
+### Added
+- **Header Icons**: Added Bell notification and User avatar icons to the preview header for improved accuracy.
+- **Version Display**: Version number now displayed in the Editor Panel header for easy reference.
+
+### Fixed
+- **Profile Layout**: Left-aligned profile box and character grid to match actual JanitorAI layout.
+- **Background Positioning**: Fixed `.pp-page-background` absolute positioning to properly display behind content.
+- **Pop-out Preview**: Updated pop-out window CSS for accurate layout and background rendering.
+
+### Removed
+- **Card Height Slider**: Removed problematic card height control that was causing layout issues.
+
 ## [1.5.1] - 2026-01-16
 ### Added
 - **Smart Code Import**: The Code Editor now automatically detects full JAI exports. It extracts CSS into the Code tab and Bio HTML into the Content tab during paste operations.

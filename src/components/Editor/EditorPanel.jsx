@@ -80,6 +80,7 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                 <h1>
                     <FileJson size={20} style={{ marginRight: 8, color: 'var(--accent-primary)' }} />
                     Profile Editor
+                    <span style={{ fontSize: '0.6rem', color: '#718096', marginLeft: '8px', fontWeight: 400 }}>v1.6.0</span>
                 </h1>
                 <div className="tabs">
                     <button className={activeTab === 'visual' ? 'active' : ''} onClick={() => setActiveTab('visual')}>
