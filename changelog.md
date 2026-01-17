@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2026-01-16
+### Added
+- **Smart Code Import**: The Code Editor now automatically detects full JAI exports. It extracts CSS into the Code tab and Bio HTML into the Content tab during paste operations.
+
 ## [1.5.0] - 2026-01-16
 ### Major Feature Release: Card Templates & Attribution System
 This release introduces a robust structural template system for character cards and automatic author attribution for community designs.

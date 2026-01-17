@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Copy, Trash2, Code, ChevronDown, Check } from 'lucide-react'
+import { useToast } from '../../../context/ToastContext'
 import Button from '../../ui/Button'
 import './Highlighting.css'
 
@@ -38,13 +39,50 @@ const SNIPPETS = [
     { label: 'Followers Count', code: '.pp-uc-followers-count {\n    \n}', desc: 'Follower stat box' },
 ]
 
-export default function SmartCodeEditor({ code, onChange }) {
+export default function SmartCodeEditor({ code, onChange, onSmartImport }) {
     const textareaRef = useRef(null)
     const preRef = useRef(null)
     const lineNumbersRef = useRef(null)
+    const { addToast } = useToast()
 
     const [showSnippets, setShowSnippets] = useState(false)
     const [copied, setCopied] = useState(false)
+
+    // Smart Import Logic
+    const handlePaste = (e) => {
+        const pasteData = e.clipboardData.getData('text')
+
+        // Detect if this is likely a full JAI export (has style tags)
+        if (pasteData.includes('<style>') || (pasteData.includes('.pp-') && pasteData.includes('<div'))) {
+            e.preventDefault()
+
+            let extractedCss = ''
+            let extractedBio = pasteData
+
+            // 1. Try to extract from <style> tags
+            const styleMatch = pasteData.match(/<style>([\s\S]*?)<\/style>/)
+            if (styleMatch) {
+                extractedCss = styleMatch[1].trim()
+                // Remove the style block from the bio
+                extractedBio = pasteData.replace(/<style>[\s\S]*?<\/style>/, '').trim()
+            } else {
+                // If no style tags but contains CSS patterns, try to split at the first div
+                const divIndex = pasteData.indexOf('<')
+                if (divIndex > 0) {
+                    extractedCss = pasteData.substring(0, divIndex).trim()
+                    extractedBio = pasteData.substring(divIndex).trim()
+                }
+            }
+
+            // Apply the split
+            if (extractedCss) onChange(extractedCss)
+            if (extractedBio && onSmartImport) {
+                onSmartImport({ bio: extractedBio })
+            }
+
+            addToast('Smart Import: CSS and Bio HTML extracted!', 'success')
+        }
+    }
 
     // Sync Scroll
     const handleScroll = (e) => {
@@ -190,6 +228,7 @@ export default function SmartCodeEditor({ code, onChange }) {
                     onChange={(e) => onChange(e.target.value)}
                     onScroll={handleScroll}
                     onKeyDown={handleKeyDown}
+                    onPaste={handlePaste}
                     spellCheck="false"
                     placeholder="/* Enter custom CSS here... */" // Placeholder in transparent textarea might be tricky if pre is front? No, textarea is z-index 2.
                 />

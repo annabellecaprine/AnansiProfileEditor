@@ -176,6 +176,7 @@ export default function EditorPanel({ theme, setTheme, content, setContent, manu
                         <SmartCodeEditor
                             code={manualCSS}
                             onChange={setManualCSS}
+                            onSmartImport={(newContent) => setContent(prev => ({ ...prev, ...newContent }))}
                         />
                     </div>
                 )}
